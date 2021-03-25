@@ -18,10 +18,10 @@ class BDD
     public static function initInstance()
     {
         try {
-            $hostname = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "cesiphp";
+            $hostname = "mysql-marmitothon.alwaysdata.net";
+            $username = "230409";
+            $password = "marmitothon-cubes";
+            $dbname = "marmitothon_bdd";
 
             SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
