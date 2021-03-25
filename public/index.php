@@ -28,12 +28,12 @@ if($controller != ''){
         }else{
             echo $controller->index();
         }
+        }else{
+            $controller = new src\Controller\ArticleController();
+            echo $controller->index();
+        }
+
     }else{
         $controller = new src\Controller\ArticleController();
         echo $controller->index();
-    }
-
-}else{
-    $controller = new src\Controller\ArticleController();
-    echo $controller->index();
 }
