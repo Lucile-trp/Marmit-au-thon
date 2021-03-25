@@ -5,7 +5,7 @@ fait par
 
 Mariam EL-ALLALI
 
-Gregory LEBLOND
+Grégory LEBLOND
 
 Lucile TRIPIER
 
