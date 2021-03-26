@@ -1,3 +1,4 @@
-/vendor/
+vendor/
 .idea/
-/src/Model/BDD.php
+src/Model/Credentials.php
+var/
