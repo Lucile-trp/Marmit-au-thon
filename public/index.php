@@ -20,7 +20,7 @@ $action = (isset($_GET["action"])) ? $_GET["action"] : "";
 $param = (isset($_GET["param"])) ? $_GET["param"] : "";
 
 if($controller != ''){
-    $class = "src\Controller\\".$controller."Controller";
+    $class = "src\Controller\\".$controller."_Controller";
     if(class_exists($class)){
         $controller = new $class;
         if(method_exists($class, $action)){
@@ -29,11 +29,11 @@ if($controller != ''){
             echo $controller->index();
         }
         }else{
-            $controller = new src\Controller\ArticleController();
+            $controller = new src\Controller\Not_Found_Controller();
             echo $controller->index();
         }
 
     }else{
-        $controller = new src\Controller\ArticleController();
+        $controller = new src\Controller\Not_Found_Controller();
         echo $controller->index();
 }
