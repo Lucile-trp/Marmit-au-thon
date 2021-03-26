@@ -2,6 +2,7 @@
 
 namespace src\Model;
 use PDO;
+include ("./Credentials.php");
 
 class BDD
 {
@@ -18,10 +19,10 @@ class BDD
     public static function initInstance()
     {
         try {
-            $hostname = "mysql-marmitothon.alwaysdata.net";
-            $username = "230409";
-            $password = "marmitothon-cubes";
-            $dbname = "marmitothon_bdd";
+            $hostname = $host;
+            $username = $user;
+            $password = $pass;
+            $dbname = $db;
 
             SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
