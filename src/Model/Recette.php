@@ -1,10 +1,30 @@
 <?php
+
+
 class Recette{
     private $idrecipe;
     private $recname;
     private $recimg;
     private $recidclient;
     private $rechowmany;
+
+    private $joinidrecipe;
+    private $joiniddiet;
+
+    private $iddiet;
+    private $dietname;
+
+    private $idingredient;
+    private $ingname;
+
+    private $joinidingredient;
+    private $joinquantite;
+    private $joinidunity;
+
+    private $idunity;
+    private $uniname;
+
+
 
     /**
      * @return mixed
@@ -91,10 +111,187 @@ class Recette{
     }
 
     /**
-     * @param \PDO $bdd
+     * @return mixed
+     */
+    public function getJoinidrecipe()
+    {
+        return $this->joinidrecipe;
+    }
+
+    /**
+     * @param mixed $joinidrecipe
+     */
+    public function setJoinidrecipe($joinidrecipe): void
+    {
+        $this->joinidrecipe = $joinidrecipe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoiniddiet()
+    {
+        return $this->joiniddiet;
+    }
+
+    /**
+     * @param mixed $joiniddiet
+     */
+    public function setJoiniddiet($joiniddiet): void
+    {
+        $this->joiniddiet = $joiniddiet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIddiet()
+    {
+        return $this->iddiet;
+    }
+
+    /**
+     * @param mixed $iddiet
+     */
+    public function setIddiet($iddiet): void
+    {
+        $this->iddiet = $iddiet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDietname()
+    {
+        return $this->dietname;
+    }
+
+    /**
+     * @param mixed $dietname
+     */
+    public function setDietname($dietname): void
+    {
+        $this->dietname = $dietname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdingredient()
+    {
+        return $this->idingredient;
+    }
+
+    /**
+     * @param mixed $idingredient
+     */
+    public function setIdingredient($idingredient): void
+    {
+        $this->idingredient = $idingredient;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIngname()
+    {
+        return $this->ingname;
+    }
+
+    /**
+     * @param mixed $ingname
+     */
+    public function setIngname($ingname): void
+    {
+        $this->ingname = $ingname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoinidingredient()
+    {
+        return $this->joinidingredient;
+    }
+
+    /**
+     * @param mixed $joinidingredient
+     */
+    public function setJoinidingredient($joinidingredient): void
+    {
+        $this->joinidingredient = $joinidingredient;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoinquantite()
+    {
+        return $this->joinquantite;
+    }
+
+    /**
+     * @param mixed $joinquantite
+     */
+    public function setJoinquantite($joinquantite): void
+    {
+        $this->joinquantite = $joinquantite;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoinidunity()
+    {
+        return $this->joinidunity;
+    }
+
+    /**
+     * @param mixed $joinidunity
+     */
+    public function setJoinidunity($joinidunity): void
+    {
+        $this->joinidunity = $joinidunity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdunity()
+    {
+        return $this->idunity;
+    }
+
+    /**
+     * @param mixed $idunity
+     */
+    public function setIdunity($idunity): void
+    {
+        $this->idunity = $idunity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUniname()
+    {
+        return $this->uniname;
+    }
+
+    /**
+     * @param mixed $uniname
+     */
+    public function setUniname($uniname): void
+    {
+        $this->uniname = $uniname;
+    }
+
+
+    /**
+     * @param PDO $bdd
      * @param Int $id
      */
-    public function getRecipeFromId(\PDO $bdd, Int $id){
+    public function getRecipeFromId(PDO $bdd, Int $id){
         $query = "SELECT * FROM recipe WHERE idrecipe = :id";
 
         $stmt = $bdd->prepare($query);
@@ -107,4 +304,61 @@ class Recette{
         }
 
     }
+//RECUPERER tous les ingrédients de la recette via son id
+    public function getIngredient(PDO $bdd, Int $id){
+        $query = "SELECT ingname, joinquantite, uniname FROM ingredient INNER JOIN joinrecing
+                    ON idingredient=joinidingredient INNER JOIN unity
+                    ON joinidunite=idunity INNER JOIN recipe
+                    ON  joinidrecipe=1 = :id";
+
+        $stmt = $bdd->prepare($query);
+        $stmt->bindValue(
+            ":id", $this->getIdrecipe(), PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    return $stmt->fetchAll();
+    }
+
+//RECUPERER toutes les unités
+    public function getAllUnity(PDO $bdd, Int $id){
+        $query = "SELECT uniname FROM unity";
+
+        $stmt = $bdd->prepare($query);
+        $stmt->bindValue(
+            ":id", $this->getIdrecipe(), PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+        return $stmt->fetchAll();
+    }
+
+//CREER nouvelle recette
+    public function AddNewRecipe(\PDO $bdd){
+        $client="";
+        try{
+            // INSERT DATABASE
+            $queryRecipe="INSERT INTO recipe (recname, recimg, recidclient, rechowmany)
+                VALUES(:recname, :recimg, :recidclient, :rechowmany)";
+            $requeteRecipe = $bdd->prepare($queryRecipe);
+            $execute = $requeteRecipe->execute([
+                "recname" => $this->getRecname(),
+                "recimg" => $this->getRecimg(),
+                "recidclient" => $this->getRecidclient(),
+                "rechowmany" =>$this->getRechowmany()
+            ]);
+            return "OK";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
 }
