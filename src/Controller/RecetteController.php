@@ -1,5 +1,5 @@
 <?php
-class Recette_Controller {
+class RecetteController {
     public function index(){
 
     }
