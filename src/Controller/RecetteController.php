@@ -1,6 +1,10 @@
 <?php
-class RecetteController {
-    public function index(){
+namespace src\Controller;
 
+use src\Controller\AbstractController;
+
+class RecetteController extends AbstractController {
+    public function index(){
+        echo "page recette";
     }
 }
