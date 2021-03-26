@@ -1,0 +1,276 @@
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    margin: 0 0;
+    padding: 0 0;
+}
+
+/* HEADER */
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+#logotype {
+    width: 120px;
+    margin-top: 6px;
+}
+#logotype2{
+    display: none;
+}
+#search-bar {
+    display: flex;
+    align-items: center;
+    width : 100%;
+}
+
+#form-header {
+    background-color: white;
+    border-radius: 5px;
+    border-radius: 20px;
+    margin:  15px auto;
+    border: 0.5px solid #D6D6D6;
+    width: 80%;
+    justify-content: space-between;
+    display: flex;
+}
+
+#form-input-search {
+    border: none;
+    margin-left: 20px;
+    font-size : 0.8em;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+#form-btn-search{
+    border: none;
+    color: rgba(0, 0, 0, 0.2);
+    background: none;
+    margin-right: 10px;
+    font-size: 0.6em;
+}
+
+#separator-vertical {
+    height: 20px;
+    border: 0.5px solid white;
+    margin: auto 30px auto 30px;
+}
+
+/* FOOTER */
+
+
+hr {
+    color: #FB7051;
+}
+
+h6 {
+    margin: 25px 0px 0px 0px;
+    font-size: 1em ;
+    font-weight: 500;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li{
+    line-height: 14px;
+}
+
+.footer-container {
+    background-color: #474645;
+    color: white;
+    padding: 25px 30px;
+}
+
+h6{
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#form-newsletter{
+
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+#form-input-mail {
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    margin:  0px 0px 0px 10px;
+
+}
+
+#btn-form-newsletter{
+    background-color: #FB7051;
+    color: #474645;
+    border-radius: 10px;
+    border:0;
+    padding: 5px 15px;
+    width : 90px;
+
+}
+
+#copyright{
+    font-size: 11px;
+    font-weight: 300;
+    text-align: center;
+    margin: 20px 0px;
+
+}
+
+
+/* TRES PETIT : MOBILE FIRST == jusqu'à 600 */
+
+@media only screen and (max-width: 600px){
+    /* HEADER */
+
+    .header-container nav {
+        display: none;
+    }
+
+
+
+}
+/* PETITS : ENTRE DEUX == 600 px */
+@media only screen and (min-width: 600px) {
+
+    /* HEADER */
+    .header-container nav {
+        display : none;
+    }
+
+
+
+}
+
+/* MEDIUM : TABLETTE == 768px */
+@media only screen and (min-width: 768px) {
+
+    /* HEADER */
+
+    #logotype {
+        display: none;
+    }
+
+    #logotype2{
+        display: block;
+        margin-left: 60px;
+        margin-right: 60px;
+        width: 120px;
+        margin-top: 6px;
+    }
+
+    .header-container {
+        background-color: #FB7051;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 80px;
+        align-items: center;
+
+    }
+    #form-header {
+        width: 100%;
+    }
+
+
+    .header-container nav {
+        margin-right: 60px;
+        display : block;
+    }
+
+    .header-container nav ul{
+        display: flex;
+        flex-direction: row;
+    }
+    .header-container li {
+        background-color: white;
+        width: 80px;
+        height : 25px ;
+        margin: auto 10px;
+        text-align: center;
+        border-radius: 5px 0px;
+        display: flex;
+    }
+
+    .header-container li a {
+        color: #FB7051 ;
+        margin: auto;
+
+    }
+
+    /* FOOTER */
+    .footer-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 50px;
+    }
+
+    .section3 {
+        grid-column: 1/3;
+
+    }
+    .section4 {
+        grid-column: 1/3;
+
+    }
+
+
+
+
+}
+
+/* LARGE : ENTRE DEUX == 992px */
+
+@media only screen and (min-width: 992px){
+    /*HEADER*/
+
+
+    #form-header {
+        width: 100%;
+    }
+
+
+    /* FOOTER */
+
+    .footer-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 50px;
+    }
+
+    .section3 {
+        grid-column: 3;
+        align-self:flex-end;
+    }
+
+    .section4 {
+        grid-column: 2 / 3;
+    }
+}
+
+/* EXTRA LARGE : DESKTOP == 1200px */
+
+@media only screen and (min-width: 1200px){
+
+
+}

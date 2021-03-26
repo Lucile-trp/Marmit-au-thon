@@ -2,13 +2,81 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}Marmit'O Thon{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bienvenue sur Marmit'au thon{% endblock %}</title>
     {% block css %}
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="/assets/styles.css">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
     {% endblock %}
 </head>
+
+<header>
+    <section class="header-container">
+        <a href="#" ><img id="logotype" src="/uploads/marmit_au_thon-05.svg" />
+            <img id="logotype2" src="/uploads/marmit_au_thon-02.svg"/></a>
+        <div id="search-bar" class="search-bar" >
+            <form id="form-header" method="post">
+                <input id="form-input-search" type="text" placeholder="Que voulez vous manger ?">
+                <input id="form-btn-search" type="submit" value="Rechercher">
+            </form>
+        </div>
+        <div id="separator-vertical"></div>
+        <nav>
+            <ul>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Recettes</a></li>
+                <li><a href="#">Connexion</a></li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
 <body>
 {% block body %}{% endblock %}
 {% block javascript %}{% endblock %}
 </body>
+
+<footer>
+    <div class="footer-container">
+        <section class="section1">
+            <h6>Accéder aux pages</h6>
+            <hr>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Toutes les recettes</a></li>
+                <li><a href="#">Compte personnel</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Panier</a></li>
+                <li><a href="#">Mentions légales</a></li>
+            </ul>
+        </section>
+
+        <section class="section2">
+            <h6>Suivez-nous</h6>
+            <hr>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
+        </section>
+
+        <section class="section3">
+            <h6>Nouveaux articles ? Nouvelles recettes ? <br>Recevez les sur votre boite mail !</h6>
+            <form id="form-newsletter" method="POST">
+                <input id="form-input-mail" name="email" type="email" placeholder="Votre Adresse-email"/>
+                <input id="btn-form-newsletter" type="submit" value="S'abonner"/>
+            </form>
+        </section>
+
+        <section class="section4">
+            <p id=copyright>Copyright © - Marmit'au thon - 2021</p>
+        </section>
+
+    </div>
+</footer>
+
 </html>
