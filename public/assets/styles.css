@@ -187,7 +187,7 @@ h6{
 
     }
 
-    nav {
+    .header-container nav {
         margin-right: 60px;
         display : block;
     }

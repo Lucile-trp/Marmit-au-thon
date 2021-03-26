@@ -42,49 +42,117 @@ class __TwigTemplate_1cb498b9685fc97ccf3c83fc0cc149b9db3bd499978dbd06719ce09fd80
 <html lang=\"fr\">
 <head>
     <meta charset=\"utf-8\">
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
     <title>";
-        // line 5
+        // line 7
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
     ";
-        // line 6
+        // line 8
         $this->displayBlock('css', $context, $blocks);
-        // line 9
+        // line 14
         echo "</head>
+
+<header>
+    <section class=\"header-container\">
+        <a href=\"#\" ><img id=\"logotype\" src=\"/uploads/marmit_au_thon-05.svg\" />
+            <img id=\"logotype2\" src=\"/uploads/marmit_au_thon-02.svg\"/></a>
+        <div id=\"search-bar\" class=\"search-bar\" >
+            <form id=\"form-header\" method=\"post\">
+                <input id=\"form-input-search\" type=\"text\" placeholder=\"Que voulez vous manger ?\">
+                <input id=\"form-btn-search\" type=\"submit\" value=\"Rechercher\">
+            </form>
+        </div>
+        <div id=\"separator-vertical\"></div>
+        <nav>
+            <ul>
+                <li><a href=\"#\">Blog</a></li>
+                <li><a href=\"#\">Recettes</a></li>
+                <li><a href=\"#\">Connexion</a></li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
 <body>
 ";
-        // line 11
+        // line 38
         $this->displayBlock('body', $context, $blocks);
-        // line 12
+        // line 39
         $this->displayBlock('javascript', $context, $blocks);
-        // line 13
+        // line 40
         echo "</body>
+
+<footer>
+    <div class=\"footer-container\">
+        <section class=\"section1\">
+            <h6>Accéder aux pages</h6>
+            <hr>
+            <ul>
+                <li><a href=\"#\">Accueil</a></li>
+                <li><a href=\"#\">Toutes les recettes</a></li>
+                <li><a href=\"#\">Compte personnel</a></li>
+                <li><a href=\"#\">Blog</a></li>
+                <li><a href=\"#\">Panier</a></li>
+                <li><a href=\"#\">Mentions légales</a></li>
+            </ul>
+        </section>
+
+        <section class=\"section2\">
+            <h6>Suivez-nous</h6>
+            <hr>
+            <ul>
+                <li><a href=\"#\">Facebook</a></li>
+                <li><a href=\"#\">Instagram</a></li>
+                <li><a href=\"#\">Twitter</a></li>
+            </ul>
+        </section>
+
+        <section class=\"section3\">
+            <h6>Nouveaux articles ? Nouvelles recettes ? <br>Recevez les sur votre boite mail !</h6>
+            <form id=\"form-newsletter\" method=\"POST\">
+                <input id=\"form-input-mail\" name=\"email\" type=\"email\" placeholder=\"Votre Adresse-email\"/>
+                <input id=\"btn-form-newsletter\" type=\"submit\" value=\"S'abonner\"/>
+            </form>
+        </section>
+
+        <section class=\"section4\">
+            <p id=copyright>Copyright - Marmit'au thon - 2021</p>
+        </section>
+
+    </div>
+</footer>
+
 </html>";
     }
 
-    // line 5
+    // line 7
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
-        echo "Marmit'O Thon";
+        echo "Bienvenue sur Marmit'au thon";
     }
 
-    // line 6
+    // line 8
     public function block_css($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 7
-        echo "        <link rel=\"stylesheet\" href=\"\">
+        // line 9
+        echo "        <link rel=\"stylesheet\" href=\"/assets/styles.css\">
+
+        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">
+        <link href=\"https://fonts.googleapis.com/css2?family=Roboto\" rel=\"stylesheet\">
     ";
     }
 
-    // line 11
+    // line 38
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 12
+    // line 39
     public function block_javascript($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -97,7 +165,7 @@ class __TwigTemplate_1cb498b9685fc97ccf3c83fc0cc149b9db3bd499978dbd06719ce09fd80
 
     public function getDebugInfo()
     {
-        return array (  88 => 12,  82 => 11,  77 => 7,  73 => 6,  66 => 5,  61 => 13,  59 => 12,  57 => 11,  53 => 9,  51 => 6,  47 => 5,  41 => 1,);
+        return array (  156 => 39,  150 => 38,  142 => 9,  138 => 8,  131 => 7,  85 => 40,  83 => 39,  81 => 38,  55 => 14,  53 => 8,  49 => 7,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -106,15 +174,83 @@ class __TwigTemplate_1cb498b9685fc97ccf3c83fc0cc149b9db3bd499978dbd06719ce09fd80
 <html lang=\"fr\">
 <head>
     <meta charset=\"utf-8\">
-    <title>{% block title %}Marmit'O Thon{% endblock %}</title>
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>{% block title %}Bienvenue sur Marmit'au thon{% endblock %}</title>
     {% block css %}
-        <link rel=\"stylesheet\" href=\"\">
+        <link rel=\"stylesheet\" href=\"/assets/styles.css\">
+
+        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">
+        <link href=\"https://fonts.googleapis.com/css2?family=Roboto\" rel=\"stylesheet\">
     {% endblock %}
 </head>
+
+<header>
+    <section class=\"header-container\">
+        <a href=\"#\" ><img id=\"logotype\" src=\"/uploads/marmit_au_thon-05.svg\" />
+            <img id=\"logotype2\" src=\"/uploads/marmit_au_thon-02.svg\"/></a>
+        <div id=\"search-bar\" class=\"search-bar\" >
+            <form id=\"form-header\" method=\"post\">
+                <input id=\"form-input-search\" type=\"text\" placeholder=\"Que voulez vous manger ?\">
+                <input id=\"form-btn-search\" type=\"submit\" value=\"Rechercher\">
+            </form>
+        </div>
+        <div id=\"separator-vertical\"></div>
+        <nav>
+            <ul>
+                <li><a href=\"#\">Blog</a></li>
+                <li><a href=\"#\">Recettes</a></li>
+                <li><a href=\"#\">Connexion</a></li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
 <body>
 {% block body %}{% endblock %}
 {% block javascript %}{% endblock %}
 </body>
+
+<footer>
+    <div class=\"footer-container\">
+        <section class=\"section1\">
+            <h6>Accéder aux pages</h6>
+            <hr>
+            <ul>
+                <li><a href=\"#\">Accueil</a></li>
+                <li><a href=\"#\">Toutes les recettes</a></li>
+                <li><a href=\"#\">Compte personnel</a></li>
+                <li><a href=\"#\">Blog</a></li>
+                <li><a href=\"#\">Panier</a></li>
+                <li><a href=\"#\">Mentions légales</a></li>
+            </ul>
+        </section>
+
+        <section class=\"section2\">
+            <h6>Suivez-nous</h6>
+            <hr>
+            <ul>
+                <li><a href=\"#\">Facebook</a></li>
+                <li><a href=\"#\">Instagram</a></li>
+                <li><a href=\"#\">Twitter</a></li>
+            </ul>
+        </section>
+
+        <section class=\"section3\">
+            <h6>Nouveaux articles ? Nouvelles recettes ? <br>Recevez les sur votre boite mail !</h6>
+            <form id=\"form-newsletter\" method=\"POST\">
+                <input id=\"form-input-mail\" name=\"email\" type=\"email\" placeholder=\"Votre Adresse-email\"/>
+                <input id=\"btn-form-newsletter\" type=\"submit\" value=\"S'abonner\"/>
+            </form>
+        </section>
+
+        <section class=\"section4\">
+            <p id=copyright>Copyright - Marmit'au thon - 2021</p>
+        </section>
+
+    </div>
+</footer>
+
 </html>", "base.html.twig", "C:\\dev\\www\\Marmit-au-thon\\templates\\base.html.twig");
     }
 }
