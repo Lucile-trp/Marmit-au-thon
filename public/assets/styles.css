@@ -45,7 +45,8 @@ body{
 #form-input-search {
     border: none;
     margin-left: 20px;
-    color: rgba(0, 0, 0, 0.2);
+    font-size : 0.8em;
+    color: rgba(0, 0, 0, 0.4);
 }
 
 #form-btn-search{
@@ -59,7 +60,7 @@ body{
 #separator-vertical {
     height: 20px;
     border: 0.5px solid white;
-    margin: auto 30px auto 0px;
+    margin: auto 30px auto 30px;
 }
 
 /* FOOTER */
@@ -71,14 +72,14 @@ hr {
 
 h6 {
     margin: 25px 0px 0px 0px;
-    font-size: 0.8em ;
+    font-size: 1em ;
     font-weight: 500;
 }
 
 a{
     text-decoration: none;
     color: white;
-    font-size: 0.6em;
+    font-size: 0.8em;
     font-weight: 300;
 }
 
@@ -174,6 +175,7 @@ h6{
     #logotype2{
         display: block;
         margin-left: 60px;
+        margin-right: 60px;
         width: 120px;
         margin-top: 6px;
     }
@@ -186,6 +188,10 @@ h6{
         align-items: center;
 
     }
+    #form-header {
+        width: 100%;
+    }
+
 
     .header-container nav {
         margin-right: 60px;
@@ -240,7 +246,7 @@ h6{
 
 
     #form-header {
-        width: 60%;
+        width: 100%;
     }
 
 
