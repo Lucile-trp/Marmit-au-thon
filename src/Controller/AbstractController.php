@@ -5,7 +5,7 @@ use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
-abstract class Abstract_Controller {
+abstract class AbstractController {
     protected $loader;
     protected $twig;
 
