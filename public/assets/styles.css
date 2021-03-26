@@ -1,0 +1,114 @@
+/** Page Recette **/
+
+@media only screen and (max-width: 600px){
+    html{
+        margin: auto 26px;
+    }
+    h1{
+        font-family: sans-serif;
+        font-size: 1em;
+        color: #FB7051;
+    }
+    h2{
+        font-family: sans-serif;
+        font-size: .68em;
+        color: #FB7051;
+    }
+    .category-container{
+        padding: 0;
+        display: flex;
+    }
+    .category-container div{
+        margin-right: 24px;
+    }
+    .recipe-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 16px;
+        grid-column-gap: 10px;
+    }
+    .recipe-container .card{
+        width: 142px;
+        height: 112px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        margin: 0 auto;
+    }
+    .card img{
+        border-radius: 10px 0;
+    }
+    .card h3{
+        margin: 0;
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(91.8deg, rgba(255, 255, 255, 0.8) 3.7%, rgba(255, 255, 255, 0.3) 100.95%);;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px 0;
+        text-align: start;
+        height: 27px;
+    }
+}
+@media screen and (min-width: 600px){
+    html{
+        margin: auto 26px;
+    }
+    h1{
+        font-family: sans-serif;
+        font-size: 1em;
+        color: #FB7051;
+    }
+    h2{
+        font-family: sans-serif;
+        font-size: .68em;
+        color: #FB7051;
+    }
+    .category-container{
+        padding: 0;
+        display: flex;
+    }
+    .category-container div{
+        margin-right: 24px;
+    }
+    .recipe-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 16px;
+        grid-column-gap: 10px;
+    }
+    .recipe-container .card{
+        width: 142px;
+        height: 112px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        margin: 0 auto;
+    }
+    .card img{
+        border-radius: 10px 0;
+    }
+    .card h3{
+        margin: 0;
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(91.8deg, rgba(255, 255, 255, 0.8) 3.7%, rgba(255, 255, 255, 0.3) 100.95%);;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px 0;
+        text-align: start;
+        height: 27px;
+    }
+}
+
+@media screen and (min-width: 768px){
+
+}
+@media screen and (min-width: 992px){
+
+}
+@media screen and (min-width: 1200px){
+
+}
