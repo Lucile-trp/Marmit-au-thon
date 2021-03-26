@@ -89,4 +89,22 @@ class Recette{
     public function addRecipe(){
         
     }
+
+    /**
+     * @param \PDO $bdd
+     * @param Int $id
+     */
+    public function getRecipeFromId(\PDO $bdd, Int $id){
+        $query = "SELECT * FROM recipe WHERE idrecipe = :id";
+
+        $stmt = $bdd->prepare($query);
+        $stmt->bindValue(":id", $this->getIdrecipe(), PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+
+    }
 }
