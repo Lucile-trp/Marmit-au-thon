@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Bienvenue sur Marmit'au thon{% endblock %}</title>
+
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+
     {% block css %}
-        <link rel="stylesheet" href="/assets/styles.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+
     {% endblock %}
 </head>
 
@@ -25,9 +28,9 @@
         <div id="separator-vertical"></div>
         <nav>
             <ul>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Recettes</a></li>
-                <li><a href="#">Connexion</a></li>
+                <li><a class="list-header" href="/Blog/index">Blog</a></li>
+                <li><a class="list-header" href="#">Recettes</a></li>
+                <li><a class="list-header" href="#">Connexion</a></li>
             </ul>
         </nav>
     </section>
@@ -44,12 +47,12 @@
             <h6>Accéder aux pages</h6>
             <hr>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Toutes les recettes</a></li>
-                <li><a href="#">Compte personnel</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Panier</a></li>
-                <li><a href="#">Mentions légales</a></li>
+                <li><a class="list-footer" href="#">Accueil</a></li>
+                <li><a class="list-footer" href="#">Toutes les recettes</a></li>
+                <li><a class="list-footer" href="#">Compte personnel</a></li>
+                <li><a class="list-footer" href="/Blog/index">Blog</a></li>
+                <li><a class="list-footer" href="#">Panier</a></li>
+                <li><a class="list-footer" href="#">Mentions légales</a></li>
             </ul>
         </section>
 
@@ -57,9 +60,9 @@
             <h6>Suivez-nous</h6>
             <hr>
             <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Twitter</a></li>
+                <li><a class="list-footer" href="#">Facebook</a></li>
+                <li><a class="list-footer" href="#">Instagram</a></li>
+                <li><a class="list-footer" href="#">Twitter</a></li>
             </ul>
         </section>
 
