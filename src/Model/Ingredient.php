@@ -42,19 +42,11 @@ class Ingredient{
     //REQUETES BDD
 
     //RECUPERER tous les ingrédients
-    public function getAllIngredient(\PDO $bdd, Int $id){
-        $query = "SELECT ingname FROM ingredient";
-
-        $stmt = $bdd->prepare($query);
-        $stmt->bindValue(
-            ":id", $this->getIdrecipe(), PDO::PARAM_INT);
-
-        try {
-            $stmt->execute();
-        }catch (Exception $e){
-            echo $e->getMessage();
-        }
-        return $stmt->fetchAll();
+    public function getAllIngredient(\PDO $bdd, Int $id)
+    {
+        $requete = BDD::getInstance()->prepare("SELECT * FROM ingredient");
+        $requete->execute();
+        return $requete->fetchAll(\PDO::FETCH_CLASS, "src\Model\Ingredient");
     }
 
     //RECUPERER ingrédients par recherche

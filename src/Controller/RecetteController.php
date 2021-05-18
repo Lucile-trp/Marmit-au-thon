@@ -2,28 +2,28 @@
 namespace src\Controller;
 
 use src\Controller\AbstractController;
+use src\Model\Diet;
+use src\Model\Unity;
 
 class RecetteController extends AbstractController {
     public function index(){
         echo "page recette";
     }
 
-    public function new(){
-      
-      /*  if(isset($_POST["recname"])){
-            //Traiter le formulaire = ajouter la recette en BDD
-            $recipe=new Recette;
-            $recipe->setTitre($_POST["recname"]);
-            $result=$recipe->SqlAdd(BDD::getInstance());
-            if($result =="ok"){
-                //Redirection
-            }else{
-                //Msg d'erreur
-            }
-        }else{
+    public function add(){
+        $diet=new Diet();
+        $unity=new Unity();
 
-        }
-        //Afficher le formulaire
-    }*/
+        return $this->twig->render("Recette/addRecette.html.twig",["diets"=>$diet->getAllDiet(),"unities"=>$unity->getAllUnity()]);
+
     }
+    public function checkRecette(){
+        var_dump($_POST);
+        return $this->twig->render("Recette/addRecette2.html.twig");
+    }
+
+
+
+
+
 }

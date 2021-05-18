@@ -1,0 +1,44 @@
+{% extends"base.html.twig" %}
+
+{% block title %}Ajouter une recette {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle recette</h1>
+    <form name="article" method="post" action="/recette/checkrecette" enctype="multipart/form-data">
+        <input type="text" name="combien" placeholder="Combien d'ingrédients dans votre recette ?">
+        <input type="submit" value="Choisir">
+    </form>
+    <form name="article" method="post" action="http://www.marmitothon.local/?controller=Ingredient&action=new" enctype="multipart/form-data">
+        <h2>Nom de la Recette</h2>
+            <input type="text" name="recname" placeholder="Nom de la recette" required><br>
+
+        <label for="howmany">Pour combien de personnes ?</label>
+            <select name="rechowmany" size="1">
+                <option>1 personne
+                <option>2 personnes
+                <option>4 personnes
+                <option>6 personnes
+                <option>8 personnes
+            </select><br>
+
+        <label for="diet">Régime alimentaire : </label>
+            <select name="diet" id="">
+                {% for diet in diets %}
+                    <option value="#">{{ diet.dietname }}</option>
+                {% endfor %}
+            </select><br>
+
+        <h3>Ingrédients</h3>
+            <input type="text" name="ingredient" placeholder="Ingrédient">
+            <input type="text" name="quantite" placeholder="Quantité">
+            <select name="unity" id="">
+                {% for unity in unities %}
+                    <option value="#">{{ unity.uniname }}</option>
+                {% endfor %}
+            </select><br>
+
+
+
+    </form>
+
+{% endblock %}

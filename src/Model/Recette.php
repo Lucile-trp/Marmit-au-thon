@@ -323,31 +323,14 @@ class Recette{
     return $stmt->fetchAll();
     }
 
-//RECUPERER toutes les unités
-    public function getAllUnity(PDO $bdd, Int $id){
-        $query = "SELECT uniname FROM unity";
-
-        $stmt = $bdd->prepare($query);
-        $stmt->bindValue(
-            ":id", $this->getIdrecipe(), PDO::PARAM_INT);
-
-        try {
-            $stmt->execute();
-        }catch (Exception $e){
-            echo $e->getMessage();
-        }
-        return $stmt->fetchAll();
-    }
-
 //CREER nouvelle recette
     public function AddNewRecipe(\PDO $bdd){
         $client="";
         try{
             // INSERT DATABASE
-            $queryRecipe="INSERT INTO recipe (recname, recimg, recidclient, rechowmany)
-                VALUES(:recname, :recimg, :recidclient, :rechowmany)";
-            $requeteRecipe = $bdd->prepare($queryRecipe);
-            $execute = $requeteRecipe->execute([
+            $queryRecipe=BDD::getInstance()->prepare("INSERT INTO recipe (recname, recimg, recidclient, rechowmany)
+                VALUES(:recname, :recimg, :recidclient, :rechowmany)");
+            $execute = $queryRecipe->execute([
                 "recname" => $this->getRecname(),
                 "recimg" => $this->getRecimg(),
                 "recidclient" => $this->getRecidclient(),

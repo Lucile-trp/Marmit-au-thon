@@ -1,0 +1,57 @@
+{% extends"base.html.twig" %}
+
+{% block title %}Ajouter une recette (partie 2){{ parent() }}{% endblock %}
+
+{% block body %}
+    <form name="article" method="post" action="http://www.marmitothon.local/?controller=Ingredient&action=new" enctype="multipart/form-data">
+        <h2>Nom de la Recette</h2>
+        <input type="text" name="recname" placeholder="Nom de la recette" required><br>
+        <select name="diet" id="">
+            {% for diet in diets %}
+                <option value="#">{{ diet.dietname }}</option>
+            {% endfor %}
+        </select>
+
+        </select><br>
+        <select name="rechowmany" size="1">
+            <option>1 personne
+            <option>2 personnes
+            <option>4 personnes
+            <option>6 personnes
+            <option>8 personnes
+        </select><br>
+        <?php
+    for ($j=0;$j<=$combien;$j++){
+        echo"<input type=\"text\" name=\"ingredient$j\" placeholder=\"Ingrédient $j\">
+        <input type=\"text\" name=\"quantite\" placeholder=\"Quantité\">";
+        $requete=$bdd->prepare("SELECT uniname FROM unity");
+        $requete->execute();
+        $datas = $requete->fetchAll();
+        //var_dump($datas);
+        ?>
+        <select name="unity" size="1">
+            <option>Unité
+                <?php
+
+    for($i=0;$i<=count($datas)-1;$i++){
+        $unity=$datas[$i]['uniname'];
+        echo"<option> $unity" ;
+                }
+                ?>
+        </select><br>
+        <?php
+    }
+?>
+        <textarea name="textarea"
+                  rows="10" cols="50">Votre recette.</textarea>
+        <input type="file" name="recimg">
+        <input type="submit" value="Ajouter cette recette">
+    </form>
+    <?php
+}else{
+    echo "Choississez un nombre d'ingrédients";
+}
+
+?>
+
+{% endblock %}

@@ -1,2 +1,4 @@
-/vendor/
+vendor/
 .idea/
+src/Model/Credentials.php
+var/
