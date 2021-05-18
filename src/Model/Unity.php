@@ -49,23 +49,23 @@ class Unity{
         return $requete->fetchAll(\PDO::FETCH_CLASS, "src\Model\Unity");
     }
 
-    //RECUPERER régime par recherche
-    /*public function getunityBySearch(\PDO $bdd, $search){
-        $query = "SELECT idunity, unityname FROM unity WHERE unity.unityname LIKE '%:search%'";
+    //RECUPERER régime par nom
+    public function getUnityByName($unity){
+        $query = "SELECT uniname FROM unity WHERE unity.uniname='%:unity%'";
 
         $stmt = $bdd->prepare($query);
 
         try {
             $stmt->execute([
-                ":search=>$search"
+                ":unity"=>$unity
             ]);
         }catch (Exception $e){
             echo $e->getMessage();
         }
-        $unity=$stmt->fetchAll(PDO::FETCH_CLASS, "src\Model\unity");
+        $unity=$stmt->fetchAll(PDO::FETCH_CLASS, "src\Model\Unity");
         return $unity;
 
-    }*/
+    }
 
 
 }

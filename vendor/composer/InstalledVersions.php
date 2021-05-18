@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '0151358b49dc13767167bcf5172cb24be22a5645',
+    'reference' => '24a960ddf0b828fc2ebfe29a0842a08d90121f0b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '0151358b49dc13767167bcf5172cb24be22a5645',
+      'reference' => '24a960ddf0b828fc2ebfe29a0842a08d90121f0b',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -64,12 +64,12 @@ private static $installed = array (
     ),
     'twig/twig' => 
     array (
-      'pretty_version' => 'v3.3.0',
-      'version' => '3.3.0.0',
+      'pretty_version' => 'v3.3.2',
+      'version' => '3.3.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5',
+      'reference' => '21578f00e83d4a82ecfa3d50752b609f13de6790',
     ),
   ),
 );

@@ -2,6 +2,7 @@
 
 namespace src\Model;
 use PDO;
+include ("./Credentials.php");
 
 
 
@@ -22,7 +23,10 @@ class BDD
     {
 
         try {
+<<<<<<< HEAD
             include($_SERVER["DOCUMENT_ROOT"]."/../src/Model/Credentials.php");
+=======
+>>>>>>> 76935a5bafcec6827717fa3dc2f936aaca630f3b
             $hostname = $host;
             $username = $user;
             $password = $pass;

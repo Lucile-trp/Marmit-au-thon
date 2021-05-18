@@ -2,26 +2,26 @@
 
 
 class Recette{
-    private $idrecipe;
+    //private $idrecipe;
     private $recname;
     private $recimg;
     private $recidclient;
     private $rechowmany;
 
-    private $joinidrecipe;
-    private $joiniddiet;
+    //private $joinidrecipe;
+    //private $joiniddiet;
 
-    private $iddiet;
+    //private $iddiet;
     private $dietname;
 
-    private $idingredient;
+    //private $idingredient;
     private $ingname;
 
-    private $joinidingredient;
+    //private $joinidingredient;
     private $joinquantite;
-    private $joinidunity;
+    //private $joinidunity;
 
-    private $idunity;
+    //private $idunity;
     private $uniname;
 
 
@@ -324,17 +324,33 @@ class Recette{
     }
 
 //CREER nouvelle recette
-    public function AddNewRecipe(\PDO $bdd){
-        $client="";
+    public function AddNewRecipe($recname,$recimg,$dietname,$howmany,$ingredient,$quantite,$unity,$recette){
+        //$client="";
         try{
-            // INSERT DATABASE
+            // INSERT DATABASE RECIPE
             $queryRecipe=BDD::getInstance()->prepare("INSERT INTO recipe (recname, recimg, recidclient, rechowmany)
                 VALUES(:recname, :recimg, :recidclient, :rechowmany)");
             $execute = $queryRecipe->execute([
-                "recname" => $this->getRecname(),
-                "recimg" => $this->getRecimg(),
-                "recidclient" => $this->getRecidclient(),
-                "rechowmany" =>$this->getRechowmany()
+                "recname" => $recname,
+                "recimg" => $recimg,
+                "recidclient" => $_SESSION['id'],
+                "rechowmany" =>$howmany
+            ]);
+
+            // FIND ID DIET
+            $queryRecipe=BDD::getInstance()->prepare("SELECT iddiet FROM diet WHERE dietname=:dietname");
+            $execute = $queryRecipe->execute([
+                "dietname" => $dietname
+            ]);
+
+            // INSERT DATABASE JOINRECDIET
+            $queryRecipe=BDD::getInstance()->prepare("INSERT INTO joinrecdiet (joinidrecipe, joiniddiet)
+                VALUES(:idrecipe, :iddiet)");
+            $execute = $queryRecipe->execute([
+                "idrecipe" => $idrecipe,
+                "iddiet" => $iddiet,
+                "recidclient" => $_SESSION['id'],
+                "rechowmany" =>$howmany
             ]);
             return "OK";
         }

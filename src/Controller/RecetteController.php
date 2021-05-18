@@ -11,15 +11,31 @@ class RecetteController extends AbstractController {
     }
 
     public function add(){
-        $diet=new Diet();
-        $unity=new Unity();
-
-        return $this->twig->render("Recette/addRecette.html.twig",["diets"=>$diet->getAllDiet(),"unities"=>$unity->getAllUnity()]);
+        return $this->twig->render("Recette/addRecette.html.twig");
 
     }
-    public function checkRecette(){
+    public function formAdd(){
         var_dump($_POST);
-        return $this->twig->render("Recette/addRecette2.html.twig");
+        $diet=new Diet();
+        $unity=new Unity();
+        $combien=intval($_POST['combien']);
+        return $this->twig->render("Recette/addRecette2.html.twig",[
+            "diets"=>$diet->getAllDiet(),
+            "unities"=>$unity->getAllUnity(),
+            "combien"=>$combien
+        ]);
+    }
+
+    public function AddRecipe(){
+        var_dump($_POST);
+        $dietname=$_POST['diet'];
+        $howmany=$_POST['rechowmany'];
+        $recname=$_POST['recname'];
+        $recimg=$_POST['recimg'];
+        $unity[]=$_POST['unity'];
+        $ingredient[]=$_POST['ingredient'];
+        $quantite[]=$_POST['quantite'];
+
     }
 
 

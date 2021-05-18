@@ -3,16 +3,11 @@
 {% block title %}Ajouter une recette (partie 2){{ parent() }}{% endblock %}
 
 {% block body %}
-    <form name="article" method="post" action="http://www.marmitothon.local/?controller=Ingredient&action=new" enctype="multipart/form-data">
+    <form name="article" method="post" action="/recette/addRecipe" enctype="multipart/form-data">
         <h2>Nom de la Recette</h2>
         <input type="text" name="recname" placeholder="Nom de la recette" required><br>
-        <select name="diet" id="">
-            {% for diet in diets %}
-                <option value="#">{{ diet.dietname }}</option>
-            {% endfor %}
-        </select>
 
-        </select><br>
+        <label for="howmany">Pour combien de personnes ?</label>
         <select name="rechowmany" size="1">
             <option>1 personne
             <option>2 personnes
@@ -20,37 +15,32 @@
             <option>6 personnes
             <option>8 personnes
         </select><br>
-        <?php
-    for ($j=0;$j<=$combien;$j++){
-        echo"<input type=\"text\" name=\"ingredient$j\" placeholder=\"Ingrédient $j\">
-        <input type=\"text\" name=\"quantite\" placeholder=\"Quantité\">";
-        $requete=$bdd->prepare("SELECT uniname FROM unity");
-        $requete->execute();
-        $datas = $requete->fetchAll();
-        //var_dump($datas);
-        ?>
-        <select name="unity" size="1">
-            <option>Unité
-                <?php
 
-    for($i=0;$i<=count($datas)-1;$i++){
-        $unity=$datas[$i]['uniname'];
-        echo"<option> $unity" ;
-                }
-                ?>
+        <label for="diet">Régime alimentaire : </label>
+        <select name="diet" id="">
+            {% for diet in diets %}
+                <option value="{{ diet.dietname }}">{{ diet.dietname }}</option>
+            {% endfor %}
         </select><br>
-        <?php
-    }
-?>
+
+        <h3>Ingrédients</h3>
+        {% for i in 1..combien  %}
+            <input type="text" name="ingredient[]" placeholder="Ingrédient">
+            <input type="text" name="quantite[]" placeholder="Quantité">
+            <select name="unity[]" id="">
+                {% for unity in unities %}
+                    <option value="{{ unity.uniname }}">{{ unity.uniname }}</option>
+                {% endfor %}
+            </select><br>
+        {% endfor %}
+
         <textarea name="textarea"
-                  rows="10" cols="50">Votre recette.</textarea>
-        <input type="file" name="recimg">
+                  rows="10" cols="50">Votre recette.</textarea> <br>
+        <input type="file" name="recimg"><br>
         <input type="submit" value="Ajouter cette recette">
     </form>
     <?php
-}else{
-    echo "Choississez un nombre d'ingrédients";
-}
+
 
 ?>
 
