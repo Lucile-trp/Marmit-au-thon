@@ -15,25 +15,28 @@ function chargerClasse($classe){
 spl_autoload_register("chargerClasse");
 
 // Router
-$controller = (isset($_GET["controller"])) ? $_GET["controller"] : "";
-$action = (isset($_GET["action"])) ? $_GET["action"] : "";
-$param = (isset($_GET["param"])) ? $_GET["param"] : "";
+$URLS = explode("/",$_GET["url"]);
+$controller= (isset($URLS[0])) ? $URLS[0] : '';
+$action = (isset($URLS[1])) ? $URLS[1] : '';
+$param = (isset($URLS[2])) ? $URLS[2] : '';
 
 if($controller != ''){
     $class = "src\Controller\\".$controller."Controller";
     if(class_exists($class)){
         $controller = new $class;
-        if(method_exists($class, $action)){
+        if(method_exists($class,$action)){
             echo $controller->$action($param);
         }else{
+            //Le controller existe mais pas la fonction dans le controller (page 404)
             echo $controller->index();
         }
-        }else{
-            $controller = new src\Controller\NotFoundController();
-            echo $controller->index();
-        }
-
     }else{
+        // Le controller n'existe pas (page 404)
         $controller = new src\Controller\NotFoundController();
         echo $controller->index();
+    }
+}else{
+    //Page home
+    $controller = new src\Controller\HomeController();
+    echo $controller->index();
 }
