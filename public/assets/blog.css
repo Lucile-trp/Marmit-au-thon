@@ -1,10 +1,56 @@
 .content {
-    margin: 10px 50px;
+    margin: 10px 100px;
+
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+
+}
+
+.content .card {
+    border: 1px solid black;
+    width: auto;
+    margin: 10px 10px;
+    padding: 20px 10px;
+}
+
+.content .card .article-title {
+    color: #FB7051;
+    font-size: 2em ;
+}
+
+.content .card .article-date {
+    font-style: italic ;
+    font-size: 0.8em ;
+}
+
+.content .card hr {
+    max-width: 80%;
 }
 
 .lien-accueil{
-    color : black;
+    color : white;
     text-decoration: none;
     font-size: 0.8em;
     font-weight: 300;
+    background-color: #FB7051;
+    border-radius: 10px;
+    padding:5px 10px;
+}
+
+
+/* MEDIUM : TABLETTE == 768px */
+@media only screen and (max-width: 768px) {
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+    }
+
+
 }
