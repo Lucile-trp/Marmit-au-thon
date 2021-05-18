@@ -11,10 +11,16 @@
         <div class="grid">
             {% for article in articles %}
             <div class="card">
-                    <h2 class="article-title">{{ article.art_title }}</h2><br>
-                    <p class="article-content">{{ article.art_content|raw }}</p><br>
-                    <p class="article-date">{{ article.art_date }}</p><br>
+                <h2 class="article-title">{{ article.art_title }}</h2>
+
+                <div class="card-column">
+                    <img src="http://placekitten.com/200/200">
+                </div>
+                <div class="card-column">
+                    <p class="article-content">{{ article.art_resume }}</p><br>
+                    <p class="article-date">Article posté le : {{ article.art_date }}</p><br>
                     <a class="article-lien-detail" href="/Blog/detail/{{ article.art_id }}">Voir plus...</a>
+                </div>
                 <hr>
             </div>
             {% endfor %}
