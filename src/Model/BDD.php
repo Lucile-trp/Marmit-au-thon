@@ -2,10 +2,6 @@
 
 namespace src\Model;
 use PDO;
-include ("./Credentials.php");
-
-
-
 
 class BDD
 {
