@@ -2,7 +2,7 @@
 
 namespace src\Model;
 use PDO;
-include ("./Credentials.php");
+include($_SERVER["DOCUMENT_ROOT"]."/../src/Model/Credentials.php");
 
 class BDD
 {
@@ -18,14 +18,20 @@ class BDD
 
     public static function initInstance()
     {
+
         try {
+            include($_SERVER["DOCUMENT_ROOT"]."/../src/Model/Credentials.php");
             $hostname = $host;
             $username = $user;
             $password = $pass;
             $dbname = $db;
 
+
+
             SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
 
         } catch (\Exception $e) {
             SELF::$_instance = 'Erreur : ' . $e->getMessage();

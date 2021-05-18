@@ -8,6 +8,17 @@
 {% block body %}
     <div class="content">
         <h1>Bienvenue sur le Blog !</h1>
+        <div class="grid">
+            {% for article in articles %}
+            <div class="card">
+                    <h2 class="article-title">{{ article.art_title }}</h2><br>
+                    <p class="article-content">{{ article.art_content|raw }}</p><br>
+                    <p class="article-date">{{ article.art_date }}</p><br>
+                    <a class="article-lien-detail" href="/Blog/detail/{{ article.art_id }}">Voir plus...</a>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
         <a class="lien-accueil" href="/">Retourner à l'accueil du site.</a>
     </div>
 {% endblock %}
