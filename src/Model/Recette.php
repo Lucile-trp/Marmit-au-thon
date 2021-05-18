@@ -360,4 +360,50 @@ class Recette{
 
     }
 
+    public function insertRecipe($recipename,$howmany,$iddiet,array $ingredients,array $quantity,array$units,$recipe){
+        //Insertion de la recette dans la table recipe
+        $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, rechowmany)
+                                                 VALUES(:recname, :rechowmany)");
+        try {
+            $requete1->execute([
+                "recname" => $recipename,
+                "rechowmany" => $howmany
+            ]);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+        // Insertion de l'iddiet et idrecipe dans la table joinrecdiet
+        $requete2 = BDD::getInstance()->prepare("INSERT INTO joinrecdiet(joinidrecipe,joiniddiet)
+                                                 VALUES((SELECT last_insert_id() FROM marmitothon_bdd.recipe), :iddiet)");
+        try {
+            $requete2->execute([
+                "iddiet" => $iddiet
+            ]);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+        // Insertion des ingredients dans la table ingredient et insertions dans la table joinrecing
+        // J'en ai chier pour faire ça !!!!!!!!!! Je ne sais pas si ça fonctionne, à tester ! - Grégory à 21h40
+        $insertionIngredient = BDD::getInstance()->prepare("INSERT INTO ingredient(ingname) VALUES(:ingredientName)");
+        $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinunite)
+                                                            VALUES ((SELECT last_insert_id() FROM recipe),(SELECT last_insert_id() FROM ingredient),:ingredientQuantity,:ingredientUnity)");
+
+        foreach ($ingredients as $index => $ingredient){
+            $ingredientName = $ingredient;
+            $ingredientQuantity = $quantity[$index];
+            $ingredientUnite = $units[$index];
+            try {
+                $insertionIngredient->execute([
+                    "ingredientName" => $ingredientName
+                ]);
+                $insertionJoinRecIng->execute([
+                    "ingredientQuantity" => $ingredientQuantity,
+                    "ingredientUnite" => $ingredientUnite
+                ]);
+            }catch (PDOException $exception){
+                return $exception->getMessage();
+            }
+        }
+    }
+
 }
