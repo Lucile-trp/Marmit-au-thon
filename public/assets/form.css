@@ -42,6 +42,14 @@ white{
 
     }
 }
+.ql-toolbar.ql-snow{
+    background-color: #fff;
+}
+.ql-container.ql-snow{
+    min-height: 100px;
+    background-color: #fff;
+    color: #262D35;
+}
 
 /* A PARTIR DE WIDTH = 768/992/1200px */
 @media screen and (min-width: 768px){
@@ -54,6 +62,20 @@ white{
     }
     .form_all{
         padding: 50px 20px 50px 20px;
+    }
+    .ql-toolbar.ql-snow{
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #fff;
+    }
+    .ql-container.ql-snow{
+        width: 70%;
+        min-height: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #fff;
+        color: #262D35;
     }
 }
 
