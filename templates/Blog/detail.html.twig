@@ -4,14 +4,16 @@
     <link rel="stylesheet" href="/assets/blog.css">
 {% endblock %}
 
-{% block title 'Blog -  {{ article.art_title }}' %}
+{% block title 'Blog - '  %}
 {% block body %}
     <div class="content">
         <h1 class="article-title">{{ article.art_title }}</h1>
-        <img class="article-img" src="http://placekitten.com/1000/300">
+        <img class="article-detail-img" src="http://placekitten.com/1000/300">
         <p>{{ article.art_date }}</p>
         <hr>
         <p>{{ article.art_content|raw }}</p>
+
+        <hr>
 
         <a class="lien-accueil" href="/">Retourner à l'accueil du site.</a>
     </div>
