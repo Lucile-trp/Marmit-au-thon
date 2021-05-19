@@ -1,5 +1,8 @@
 <?php
+namespace src\Model;
 
+use PDO;
+use PDOException;
 
 class Recette{
     //private $idrecipe;
@@ -23,8 +26,6 @@ class Recette{
 
     //private $idunity;
     private $uniname;
-
-
 
     /**
      * @return mixed
@@ -360,21 +361,23 @@ class Recette{
 
     }
 
-    public function insertRecipe($recipename,$howmany,$iddiet,array $ingredients,array $quantity,array$units,$recipe){
+    public function insertRecipe($recipename,$recipeImage,$howmany,$iddiet,array $ingredients,array $quantity,array $units,$recipestep){
         //Insertion de la recette dans la table recipe
-        $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, rechowmany)
-                                                 VALUES(:recname, :rechowmany)");
+        $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, recimg,rechowmany, rectext)
+                                                 VALUES(:recname, :recimg ,:rechowmany, :recipestep)");
         try {
             $requete1->execute([
                 "recname" => $recipename,
-                "rechowmany" => $howmany
+                "recimg" => $recipeImage,
+                "rechowmany" => $howmany,
+                "recipestep" => $recipestep
             ]);
         }catch (PDOException $exception){
             return $exception->getMessage();
         }
         // Insertion de l'iddiet et idrecipe dans la table joinrecdiet
         $requete2 = BDD::getInstance()->prepare("INSERT INTO joinrecdiet(joinidrecipe,joiniddiet)
-                                                 VALUES((SELECT last_insert_id() FROM marmitothon_bdd.recipe), :iddiet)");
+                                                 VALUES((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1), :iddiet)");
         try {
             $requete2->execute([
                 "iddiet" => $iddiet
@@ -383,26 +386,70 @@ class Recette{
             return $exception->getMessage();
         }
         // Insertion des ingredients dans la table ingredient et insertions dans la table joinrecing
-        // J'en ai chier pour faire ça !!!!!!!!!! Je ne sais pas si ça fonctionne, à tester ! - Grégory à 21h40
         $insertionIngredient = BDD::getInstance()->prepare("INSERT INTO ingredient(ingname) VALUES(:ingredientName)");
-        $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinunite)
-                                                            VALUES ((SELECT last_insert_id() FROM recipe),(SELECT last_insert_id() FROM ingredient),:ingredientQuantity,:ingredientUnity)");
-
+        // Si l'ingredient existe, récupérer l'id s'il n'existe pas, insérer l'ingredient
         foreach ($ingredients as $index => $ingredient){
+            $idIngredient = $this->checkIngredient($ingredient[$index]);
+            var_dump($idIngredient);
+            if (is_null($idIngredient)){
+                $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinidunite)
+                                                            VALUES ((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1),
+                                                                   (SELECT idingredient FROM marmitothon_bdd.ingredient ORDER BY idingredient DESC LIMIT 1),
+                                                                   :ingredientQuantity,
+                                                                   :ingredientUnity)");
+            }
+            else{
+                $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinidunite)
+                                                            VALUES ((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1),
+                                                                   :idIngredient,
+                                                                   :ingredientQuantity,
+                                                                   :ingredientUnity)");
+            }
             $ingredientName = $ingredient;
             $ingredientQuantity = $quantity[$index];
-            $ingredientUnite = $units[$index];
+            $ingredientUnity = $units[$index];
             try {
                 $insertionIngredient->execute([
                     "ingredientName" => $ingredientName
                 ]);
-                $insertionJoinRecIng->execute([
-                    "ingredientQuantity" => $ingredientQuantity,
-                    "ingredientUnite" => $ingredientUnite
-                ]);
+                if (is_null($idIngredient)){
+                    $insertionJoinRecIng->execute([
+                        "ingredientQuantity" => $ingredientQuantity,
+                        "ingredientUnity" => $ingredientUnity
+                    ]);
+                }else{
+                    $insertionJoinRecIng->execute([
+                        "idIngredient" => $idIngredient,
+                        "ingredientQuantity" => $ingredientQuantity,
+                        "ingredientUnity" => $ingredientUnity
+                    ]);
+                }
             }catch (PDOException $exception){
                 return $exception->getMessage();
             }
+        }
+    }
+
+    public function checkIngredient($ingredient){
+        $requete = BDD::getInstance()->prepare("SELECT idingredient FROM ingredient WHERE ingname = :ingredientName ORDER BY idingredient DESC LIMIT 1");
+        $requete->execute([
+            "ingredientName" => $ingredient
+        ]);
+        $idIngredient = $requete->fetchColumn();
+        if ($idIngredient == false){
+            return $idIngredient = null;
+        }else{
+            return $idIngredient;
+        }
+    }
+
+    public function getRecipe(){
+        $query = BDD::getInstance()->prepare("SELECT * FROM recipe WHERE recimg IS NOT NULL");
+        try {
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
         }
     }
 
