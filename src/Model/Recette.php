@@ -305,7 +305,7 @@ class Recette{
         }
 
     }
-//RECUPERER tous les ingrédients de la recette via son id
+    //RECUPERER tous les ingrédients de la recette via son id
     public function getIngredient(PDO $bdd, Int $id){
         $query = "SELECT ingname, joinquantite, uniname FROM ingredient INNER JOIN joinrecing
                     ON idingredient=joinidingredient INNER JOIN unity
