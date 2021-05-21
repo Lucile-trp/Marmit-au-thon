@@ -12,7 +12,7 @@
         <div class="form_all">
             <h1>Ajouter une nouvelle recette</h1>
             <div class="form grey">
-                <form action="/Recette/AddRecipe" method="post" enctype="multipart/form-data">
+                <form id="recipe-form" action="/Recette/AddRecipe" method="post" enctype="multipart/form-data">
                     <label for="recipename">Nom de la recette</label>
                     <input class="zone_text" type="text" name="recipename" required>
                     <br>
@@ -46,7 +46,7 @@
                     </div>
                     <label for="recipestep">Description de la recette</label><br>
                     <div type="text" id="editor">
-                        <p></p>
+                        <p>Veuillez décrire les étapes de la recette</p>
                     </div>
                     <textarea name="recipestep" style="display:none" id="hiddenArea"></textarea>
                     <br>
@@ -70,7 +70,7 @@
             theme: 'snow'
         });
 
-            $("#post").on("submit",function() {
+            $("#recipe-form").on("submit",function() {
             $("#hiddenArea").val($("#editor .ql-editor").html());
         })
         </script>
