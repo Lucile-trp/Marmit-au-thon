@@ -8,12 +8,18 @@
 {% block body %}
     <div class="content">
         <h1 class="article-title">{{ article.art_title }}</h1>
-        <img class="article-detail-img" src="http://placekitten.com/1000/300">
-        <p>{{ article.art_date }}</p>
+        <img class="article-detail-img" src="{{  article.art_image|trim('.','left') }}">
+        <p class="article-date">{{ article.art_date }}</p>
         <hr>
         <p>{{ article.art_content|raw }}</p>
 
         <hr>
+        <form class="form-btn-supprimer" method="post" action="/Blog/deleteArticle/{{ article.art_id }}">
+            <button class="btn-supprimer">Supprimer l'article</button>
+        </form>
+        <form class="form-btn-modifier" method="post" action="">
+            <button class="btn-modifier">Modifier l'article</button>
+        </form>
 
         <a class="lien-accueil" href="/">Retourner à l'accueil du site.</a>
     </div>

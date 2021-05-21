@@ -15,7 +15,11 @@
                 <h2 class="article-title">{{ article.art_title }}</h2>
 
                 <div class="card-column">
-                    <img src="http://placekitten.com/200/200">
+                    {% if article.art_image is defined %}
+                        <img src="{{  article.art_image|trim('.','left') }}" alt="image de l'article" >
+                    {% else %}
+                        <img src="http://placekitten.com/200/200">
+                    {% endif %}
                 </div>
                 <div class="card-column">
                     <p class="article-content">{{ article.art_resume }}</p><br>

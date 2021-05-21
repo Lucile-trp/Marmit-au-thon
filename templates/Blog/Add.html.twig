@@ -13,7 +13,7 @@
         <p class="error-message"style="color: red;" >{{ error_message }}</p>
         {% endif %}
 
-        <form class="grid-form" id="post" method="POST" action="/Blog/addArticle">
+        <form class="grid-form" id="post" method="POST" action="/Blog/addArticle" enctype="multipart/form-data">
             <div class="row-form row-1">
                 <input type="text" class="form-art-title" name="art-title" placeholder="Veuillez choisir le titre de votre article...">
             </div>
@@ -27,6 +27,9 @@
                     <p>Veuillez saisir le contenu de <strong>l'article</strong> </p>
                 </div>
                 <textarea name="art-content" style="display:none" id="hiddenArea"></textarea>
+            </div>
+            <div class="row-form row-4">
+                <input type="file" name="article-img" id="article-img">
             </div>
 
             <input type="submit" class="article-form-btn-submit" value="Valider">
