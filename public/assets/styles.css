@@ -76,12 +76,20 @@ h6 {
     font-weight: 500;
 }
 
-a{
+.list-footer{
     text-decoration: none;
     color: white;
     font-size: 0.8em;
     font-weight: 300;
 }
+
+.list-header{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
 
 ul {
     list-style: none;
