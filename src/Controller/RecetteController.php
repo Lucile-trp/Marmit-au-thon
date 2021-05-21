@@ -57,7 +57,7 @@ class RecetteController extends AbstractController {
             // Instanciation d'une nouvelle recette
             $recipe = new Recette();
 
-            // Insertion de la recette dans la base de données.
+            // Insertion de la recette dans la base de données
             $recipe->insertRecipe($recipeName,$recipeImage,$people,$diet,$ingredients,$quantity,$unity,$recipeDescription);
         }
         else{
@@ -65,7 +65,7 @@ class RecetteController extends AbstractController {
             var_dump($_POST);
             var_dump($_FILES);
         }
-        header("Location: /Recette/details");
+        header("Location: /Recette/listing");
     }
 
     /**
@@ -75,9 +75,9 @@ class RecetteController extends AbstractController {
      * @throws SyntaxError
      * Affiche une page recette en fonction de l'id donné en paramètre (à rajouter)
      */
-    public function details(){
+    public function oneRecipe($slug){
         $recipe = new Recette();
-        $recipes = $recipe->getRecipeByIdRecipe(43);
+        $recipes = $recipe->getRecipeBySlug($slug);
 
         $idrecipe = $recipes[0]["idrecipe"];
         $recipeName = $recipes[0]["recname"];
@@ -96,7 +96,7 @@ class RecetteController extends AbstractController {
             ];
         }
 
-        return $this->twig->render("Recette/show.html.twig",[
+        return $this->twig->render("Recette/oneRecipe.html.twig",[
             "idrecipe" => $idrecipe,
             "recipename" => $recipeName,
             "recipeslug" => $recipeSlug,
@@ -105,6 +105,20 @@ class RecetteController extends AbstractController {
             "peoples" => $nbrePersonne,
             "recipedesc" => $recipeDesc,
             "ingredients" => $tabIngredients,
+        ]);
+    }
+
+    /**
+     * Affiche une page avec un ensemble de recette
+     */
+    public function listing(){
+        $number = 10;
+        $recipe = new Recette();
+        // Le paramètre est le nom de recettes que l'ont veut afficher sur la page
+        $recipes = $recipe->getRecipes($number);
+
+        return $this->twig->render("Recette/listing.html.twig",[
+            "recipes" => $recipes
         ]);
     }
 
@@ -150,5 +164,28 @@ class RecetteController extends AbstractController {
         ]);
     }
 
+    /**
+     * @param $id
+     * Génère une PDF de la recette qui correspond à l'id donné en paramètre
+     */
+    public function generatepdf($id){
+        try {
+            $dompdf = new Dompdf();
+            $recette = new Recette();
+
+            // (Optional) Setup the paper size and orientation
+            $dompdf->setPaper('A4', 'portrait');
+            // J'utilise la fonction details() pour générer le contenu du pdf à remplacer par renderTwigForPdf
+            $dompdf->loadHtml($this->renderTwigForPdf($id));
+
+            // Render the HTML as PDF
+            $dompdf->render();
+            $slug = $recette->getRecipeSlug($id)["recnameslug"];
+            // Output the generated PDF to Browser
+            $dompdf->stream($slug . ".pdf");
+        }catch (\Exception $exception){
+            echo $exception->getMessage();
+        }
+    }
 
 }

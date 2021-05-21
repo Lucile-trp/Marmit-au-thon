@@ -1,9 +1,9 @@
 {% extends"base.html.twig" %}
 
-{% block title %}Liste des recettes {{ parent() }}{% endblock %}
+{% block title %}{{ recipename }} {{ parent() }}{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="/assets/recette_show.css">
+    <link rel="stylesheet" href="/assets/oneRecipe.css">
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,6 @@
         {% else %}
             <h1>{{ recipename }} - Recette pour {{ peoples }} personne</h1>
         {% endif %}
-        <h2>{{ recipeslug }}</h2>
         <img src="{{ recipeimg|trim('.','left') }}" alt="Image de la recette">
         <h2>Liste des ingredients</h2>
         <ul>
