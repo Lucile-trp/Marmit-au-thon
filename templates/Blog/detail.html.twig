@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/assets/blog.css">
 {% endblock %}
 
-{% block title 'Blog - '  %}
+{% block title 'Blog - Article'  %}
 {% block body %}
     <div class="content">
         <h1 class="article-title">{{ article.art_title }}</h1>
@@ -17,7 +17,7 @@
         <form class="form-btn-supprimer" method="post" action="/Blog/deleteArticle/{{ article.art_id }}">
             <button class="btn-supprimer">Supprimer l'article</button>
         </form>
-        <form class="form-btn-modifier" method="post" action="">
+        <form class="form-btn-modifier" method="post" action="/Blog/getDetailsForUpdate/{{ article.art_slug }}">
             <button class="btn-modifier">Modifier l'article</button>
         </form>
 

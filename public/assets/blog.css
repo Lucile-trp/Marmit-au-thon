@@ -10,12 +10,25 @@
 
 }
 
+.error-message{
+    color: red;
+}
+
+.success-message{
+    color:green;
+}
+
+.content h1 {
+    margin-top: 30px;
+}
+
 .content .card {
     width: auto;
-    margin: 10px 10px;
+    margin: 5px 5px;
     padding: 20px 10px;
     display:grid;
     grid-template-columns: 1fr 1fr;
+    grid-column:1/3;
 }
 
 .content .card .article-title {
@@ -28,7 +41,7 @@
 .content .card img{
     border-radius: 0 20px 0 20px;
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
 
 }
@@ -49,6 +62,11 @@
     padding: 0px 10px;
 
 
+}
+
+.article-lien-detail{
+    text-decoration: none;
+    color: #474645;
 }
 
 .lien-addform{
@@ -81,6 +99,8 @@
 }
 .content hr{
     margin-bottom: 30px;
+    margin-top: 20px;
+    height:1px;
 }
 .content .btn-supprimer{
     color : white;
@@ -188,3 +208,15 @@
     }
 
 }
+
+/* EXTRA LARGE : DESKTOP == 1200px */
+
+@media only screen and (min-width: 1200px){
+    .content .card {
+        grid-column: auto;
+
+    }
+
+}
+
+

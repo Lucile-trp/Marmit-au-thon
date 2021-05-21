@@ -83,6 +83,7 @@ class Blog {
 
     }
 
+    //Supprime un article grâce à son id
     public function deleteArticle($id){
         $bdd = BDD::getInstance();
         $request = "DELETE FROM article WHERE art_id=:id ; ";
@@ -97,6 +98,34 @@ class Blog {
 
         }
 
+    }
+
+
+    // Update de type Supprime et remplace.
+    public function updateArticle($datas){
+        $id = $datas['art-id'];
+        $title = $datas['art-title'];
+        $resume = $datas['art-resume'];
+        $content = $datas['art-content'];
+
+        $bdd = BDD::getInstance();
+        $request = "UPDATE article
+                    SET art_title = :title, art_resume = :resume, art_content=:content
+                    WHERE art_id=:id ; ";
+
+        try{
+            $req = $bdd->prepare($request);
+            $req->BindParam(':title', $title);
+            $req->BindParam(':resume', $resume);
+            $req->BindParam(':content', $content);
+            $req->BindParam(':id', $id);
+            $req->execute();
+            return true;
+
+        } catch(\PDOException $exception) {
+            echo $exception->getMessage();
+
+        }
     }
 
 }

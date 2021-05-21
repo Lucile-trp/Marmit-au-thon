@@ -46,13 +46,45 @@ class BlogController extends AbstractController
 
     //Fonction qui supprime un article
     public function deleteArticle($id){
-        //Verification du rôle
+        //TODO Verification du rôle (admin ou redacteut
         Blog::deleteArticle($id);
         header('Location: /Blog/index');
 
     }
 
+    //Fonction qui récupère les informations de l'article à modifier et qui renvoie au formulaire.
+    public function getDetailsForUpdate($slug){
+        $article = Blog::getOne($slug);
+        return $this->twig->render("Blog/updateForm.html.twig", [
+            "article" => $article
+        ]);
+
+    }
+
+    //Fonction qui met à jour en BDD l'article choisi.
+    public function updateArticle($id){
+        //TODO Verification admin ou redacteur
+        $datas = $_POST;
+
+        if($datas['art-title'] != "" && $datas['art-resume'] != "" && $datas['art-content']){
+            Blog::updateArticle($datas);
+            $article = Blog::getAll();
+            return $this->twig->render("Blog/blog.html.twig", [
+                "articles" => $article,
+                "success_message" => "Votre article à bien été modifié"
+            ]);
+        } else {
+            $error = "Il y a une erreur dans les informations";
+            return $this->twig->render("Blog/updateForm.html.twig",[
+                "error_message" => $error,
+            ]);
+
+        }
+
+
+    }
+
+
     //TODO
     // Add feature modify article (ADMIN)
-    // Add feature delete article (ADMIN)
 }
