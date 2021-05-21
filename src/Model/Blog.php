@@ -15,7 +15,7 @@ class Blog {
 
     public function getAll(){
         $bdd = BDD::getInstance();
-        $request = "SELECT * FROM article;";
+        $request = "SELECT * FROM article ORDER BY art_id DESC ;";
 
         $req = $bdd->prepare($request);
         $req->execute();
