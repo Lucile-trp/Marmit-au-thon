@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
-    height: calc(100vh - 80px);
+    height: 100%;
     grid-gap: 10px;
 }
 h3  {
@@ -21,6 +21,6 @@ span{
 }
 .list-img{
     width: 600px;
-    height: 400px;
+    height: 100%;
     margin-bottom: 20px;
 }
