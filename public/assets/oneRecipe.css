@@ -26,3 +26,27 @@ h2{
     font-size: .8em;
     font-weight: bold;
 }
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.modal-container{
+    background-color: #D6D6D6;
+    width: 60vw;
+    height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.modal form{
+    display: flex;
+    flex-direction: column;
+    margin: 0 25%;
+}
