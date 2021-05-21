@@ -167,6 +167,12 @@ class Recette{
         //Insertion de la recette dans la table recipe
         $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, recnameslug, recimg, rechowmany, rectext)
                                                  VALUES(:recname, :recnameslug, :recimg ,:rechowmany, :recipestep)");
+        // Insertion de l'iddiet et idrecipe dans la table joinrecdiet
+        $requete2 = BDD::getInstance()->prepare("INSERT INTO joinrecdiet(joinidrecipe,joiniddiet)
+                                                 VALUES((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1), :iddiet)");
+        // Insertion des ingredients dans la table ingredient et insertions dans la table joinrecing
+        $insertionIngredient = BDD::getInstance()->prepare("INSERT INTO ingredient(ingname) VALUES(:ingredientName)");
+
         try {
             $slug = new Slugify();
             $requete1->execute([
@@ -176,21 +182,12 @@ class Recette{
                 "rechowmany" => $howmany,
                 "recipestep" => $recipestep
             ]);
-        }catch (PDOException $exception){
-            return $exception->getMessage();
-        }
-        // Insertion de l'iddiet et idrecipe dans la table joinrecdiet
-        $requete2 = BDD::getInstance()->prepare("INSERT INTO joinrecdiet(joinidrecipe,joiniddiet)
-                                                 VALUES((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1), :iddiet)");
-        try {
             $requete2->execute([
                 "iddiet" => $iddiet
             ]);
         }catch (PDOException $exception){
             return $exception->getMessage();
         }
-        // Insertion des ingredients dans la table ingredient et insertions dans la table joinrecing
-        $insertionIngredient = BDD::getInstance()->prepare("INSERT INTO ingredient(ingname) VALUES(:ingredientName)");
 
         foreach ($ingredients as $index => $ingredient){
             $idIngredient = $this->checkIngredient($ingredient[$index]);
@@ -199,14 +196,14 @@ class Recette{
                                                             VALUES ((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1),
                                                                    (SELECT idingredient FROM marmitothon_bdd.ingredient ORDER BY idingredient DESC LIMIT 1),
                                                                    :ingredientQuantity,
-                                                                   :ingredientUnity)");
+                                                                   (SElECT idunity FROM unity WHERE uniname = :uniname))");
             }
             else{
                 $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinidunite)
                                                             VALUES ((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1),
                                                                    :idIngredient,
                                                                    :ingredientQuantity,
-                                                                   :ingredientUnity)");
+                                                                   (SElECT idunity FROM unity WHERE uniname = :uniname))");
             }
             $ingredientName = $ingredient;
             $ingredientQuantity = $quantity[$index];
@@ -218,13 +215,13 @@ class Recette{
                 if (is_null($idIngredient)){
                     $insertionJoinRecIng->execute([
                         "ingredientQuantity" => $ingredientQuantity,
-                        "ingredientUnity" => $ingredientUnity
+                        "uniname" => $ingredientUnity
                     ]);
                 }else{
                     $insertionJoinRecIng->execute([
                         "idIngredient" => $idIngredient,
                         "ingredientQuantity" => $ingredientQuantity,
-                        "ingredientUnity" => $ingredientUnity
+                        "uniname" => $ingredientUnity
                     ]);
                 }
             }catch (PDOException $exception){
