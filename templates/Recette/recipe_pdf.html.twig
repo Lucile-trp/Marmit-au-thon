@@ -1,0 +1,15 @@
+{% block body %}
+    {% if peoples > 1 %}
+        <h1>{{ recipename }} - Recette pour {{ peoples }} personnes</h1>
+    {% else %}
+        <h1>{{ recipename }} - Recette pour {{ peoples }} personne</h1>
+    {% endif %}
+    <ul>
+        {% for ingredient in ingredients %}
+            <li>{{ ingredient.ingredientName }} ({{ ingredient.quantity }} {{ ingredient.unity }})</li>
+        {% endfor %}
+    </ul>
+    <h2>Etapes de la recette</h2>
+    {{ recipedesc|raw }}
+    <p>PDF Généré depuis www.marmitothon.local</p>
+{% endblock %}

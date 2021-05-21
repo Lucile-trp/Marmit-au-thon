@@ -4,6 +4,10 @@ namespace src\Controller;
 use src\Model\Recette;
 use src\Model\Diet;
 use src\Model\Unity;
+use Dompdf\Dompdf;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class RecetteController extends AbstractController {
     public function index(){
@@ -48,7 +52,7 @@ class RecetteController extends AbstractController {
             $quantity = $_POST["quantite"];
             $unity = $_POST["unity"];
             $recipeDescription = $_POST["recipestep"];
-            $recipeImage = $imageFolder . $imageName;
+            $recipeImage = $imageFolder . '/' .  $imageName;
 
             // Instanciation d'une nouvelle recette
             $recipe = new Recette();
@@ -56,17 +60,95 @@ class RecetteController extends AbstractController {
             // Insertion de la recette dans la base de données.
             $recipe->insertRecipe($recipeName,$recipeImage,$people,$diet,$ingredients,$quantity,$unity,$recipeDescription);
         }
+        else{
+            echo "Erreur fonction AddRecipe, POST ou FILES vide.";
+            var_dump($_POST);
+            var_dump($_FILES);
+        }
+        header("Location: /Recette/details");
     }
 
-    public function show(){
+    /**
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * Affiche une page recette en fonction de l'id donné en paramètre (à rajouter)
+     */
+    public function details(){
         $recipe = new Recette();
+        $recipes = $recipe->getRecipeByIdRecipe(43);
+
+        $idrecipe = $recipes[0]["idrecipe"];
+        $recipeName = $recipes[0]["recname"];
+        $recipeSlug = $recipes[0]["recnameslug"];
+        $recipeImg = $recipes[0]["recimg"];
+        $idClient = $recipes[0]["recidclient"];
+        $nbrePersonne = $recipes[0]["rechowmany"];
+        $recipeDesc = $recipes[0]["rectext"];
+
+        $tabIngredients = [];
+        foreach ($recipes as $recipe){
+            $tabIngredients [] = [
+                "ingredientName" => $recipe["ingname"],
+                "quantity" => $recipe["joinquantite"],
+                "unity" => $recipe["uniname"]
+            ];
+        }
+
         return $this->twig->render("Recette/show.html.twig",[
-            "recipes" => $recipe->getRecipe()
+            "idrecipe" => $idrecipe,
+            "recipename" => $recipeName,
+            "recipeslug" => $recipeSlug,
+            "recipeimg" => $recipeImg,
+            "idClient" => $idClient,
+            "peoples" => $nbrePersonne,
+            "recipedesc" => $recipeDesc,
+            "ingredients" => $tabIngredients,
         ]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * Génère une vue Twig qui sera utilisée par la fonction generatePdf
+     */
+    public function renderTwigForPdf($id){
+        $recipe = new Recette();
+        // Remplacer par $id
+        $recipes = $recipe->getRecipeByIdRecipe($id);
 
+        $idrecipe = $recipes[0]["idrecipe"];
+        $recipeName = $recipes[0]["recname"];
+        $recipeSlug = $recipes[0]["recnameslug"];
+        $recipeImg = $recipes[0]["recimg"];
+        $idClient = $recipes[0]["recidclient"];
+        $nbrePersonne = $recipes[0]["rechowmany"];
+        $recipeDesc = $recipes[0]["rectext"];
 
+        $tabIngredients = [];
+        foreach ($recipes as $recipe){
+            $tabIngredients [] = [
+                "ingredientName" => $recipe["ingname"],
+                "quantity" => $recipe["joinquantite"],
+                "unity" => $recipe["uniname"]
+            ];
+        }
+
+        return $this->twig->render("Recette/recipe_pdf.html.twig",[
+            "idrecipe" => $idrecipe,
+            "recipename" => $recipeName,
+            "recipeslug" => $recipeSlug,
+            "recipeimg" => $recipeImg,
+            "idClient" => $idClient,
+            "peoples" => $nbrePersonne,
+            "recipedesc" => $recipeDesc,
+            "ingredients" => $tabIngredients,
+        ]);
+    }
 
 
 }

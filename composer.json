@@ -1,6 +1,8 @@
 {
     "require": {
         "twig/twig": "^3.3",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "cocur/slugify": "^4.0",
+        "dompdf/dompdf": "^1.0"
     }
 }

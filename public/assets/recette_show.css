@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+img {
+    height: 300px;
+    width: 400px;
+}
+h2{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.btn-container {
+    display: flex;
+}
+.btn-container .btn:last-child{
+    margin-left: 20px;
+}
+.btn{
+    color: #262D35;
+    background-color: #FB7051;
+    padding: 1em;
+    border-radius: 10px;
+    font-size: .8em;
+    font-weight: bold;
+}

@@ -3,29 +3,16 @@ namespace src\Model;
 
 use PDO;
 use PDOException;
+use Cocur\Slugify\Slugify;
 
 class Recette{
-    //private $idrecipe;
+    private $idrecipe;
     private $recname;
+    private $recnameslug;
     private $recimg;
     private $recidclient;
     private $rechowmany;
-
-    //private $joinidrecipe;
-    //private $joiniddiet;
-
-    //private $iddiet;
-    private $dietname;
-
-    //private $idingredient;
-    private $ingname;
-
-    //private $joinidingredient;
-    private $joinquantite;
-    //private $joinidunity;
-
-    //private $idunity;
-    private $uniname;
+    private $rectext;
 
     /**
      * @return mixed
@@ -38,7 +25,7 @@ class Recette{
     /**
      * @param mixed $idrecipe
      */
-    public function setIdrecipe($idrecipe)
+    public function setIdrecipe($idrecipe): void
     {
         $this->idrecipe = $idrecipe;
     }
@@ -54,7 +41,7 @@ class Recette{
     /**
      * @param mixed $recname
      */
-    public function setRecname($recname)
+    public function setRecname($recname): void
     {
         $this->recname = $recname;
     }
@@ -70,7 +57,7 @@ class Recette{
     /**
      * @param mixed $recimg
      */
-    public function setRecimg($recimg)
+    public function setRecimg($recimg): void
     {
         $this->recimg = $recimg;
     }
@@ -86,7 +73,7 @@ class Recette{
     /**
      * @param mixed $recidclient
      */
-    public function setRecidclient($recidclient)
+    public function setRecidclient($recidclient): void
     {
         $this->recidclient = $recidclient;
     }
@@ -102,7 +89,7 @@ class Recette{
     /**
      * @param mixed $rechowmany
      */
-    public function setRechowmany($rechowmany)
+    public function setRechowmany($rechowmany): void
     {
         $this->rechowmany = $rechowmany;
     }
@@ -210,81 +197,17 @@ class Recette{
     /**
      * @return mixed
      */
-    public function getJoinidingredient()
+    public function getRectext()
     {
-        return $this->joinidingredient;
+        return $this->rectext;
     }
 
     /**
-     * @param mixed $joinidingredient
+     * @param mixed $rectext
      */
-    public function setJoinidingredient($joinidingredient): void
+    public function setRectext($rectext): void
     {
-        $this->joinidingredient = $joinidingredient;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getJoinquantite()
-    {
-        return $this->joinquantite;
-    }
-
-    /**
-     * @param mixed $joinquantite
-     */
-    public function setJoinquantite($joinquantite): void
-    {
-        $this->joinquantite = $joinquantite;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getJoinidunity()
-    {
-        return $this->joinidunity;
-    }
-
-    /**
-     * @param mixed $joinidunity
-     */
-    public function setJoinidunity($joinidunity): void
-    {
-        $this->joinidunity = $joinidunity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdunity()
-    {
-        return $this->idunity;
-    }
-
-    /**
-     * @param mixed $idunity
-     */
-    public function setIdunity($idunity): void
-    {
-        $this->idunity = $idunity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUniname()
-    {
-        return $this->uniname;
-    }
-
-    /**
-     * @param mixed $uniname
-     */
-    public function setUniname($uniname): void
-    {
-        $this->uniname = $uniname;
+        $this->rectext = $rectext;
     }
 
 
@@ -363,11 +286,13 @@ class Recette{
 
     public function insertRecipe($recipename,$recipeImage,$howmany,$iddiet,array $ingredients,array $quantity,array $units,$recipestep){
         //Insertion de la recette dans la table recipe
-        $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, recimg,rechowmany, rectext)
-                                                 VALUES(:recname, :recimg ,:rechowmany, :recipestep)");
+        $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, recnameslug, recimg,rechowmany, rectext)
+                                                 VALUES(:recname, :recnameslug, :recimg ,:rechowmany, :recipestep)");
         try {
+            $slug = new Slugify();
             $requete1->execute([
                 "recname" => $recipename,
+                "recnameslug" => $slug->slugify($recipename),
                 "recimg" => $recipeImage,
                 "rechowmany" => $howmany,
                 "recipestep" => $recipestep
@@ -390,7 +315,6 @@ class Recette{
         // Si l'ingredient existe, récupérer l'id s'il n'existe pas, insérer l'ingredient
         foreach ($ingredients as $index => $ingredient){
             $idIngredient = $this->checkIngredient($ingredient[$index]);
-            var_dump($idIngredient);
             if (is_null($idIngredient)){
                 $insertionJoinRecIng = BDD::getInstance()->prepare("INSERT INTO joinrecing(joinidrecipe,joinidingredient,joinquantite,joinidunite)
                                                             VALUES ((SELECT idrecipe FROM marmitothon_bdd.recipe ORDER BY idrecipe DESC LIMIT 1),
@@ -443,10 +367,41 @@ class Recette{
         }
     }
 
-    public function getRecipe(){
-        $query = BDD::getInstance()->prepare("SELECT * FROM recipe WHERE recimg IS NOT NULL");
+    public function getRecipeByIdRecipe($idrecipe){
+        $query = BDD::getInstance()->prepare("
+            SELECT 	r.idrecipe,
+                    r.recname,
+                    r.recnameslug,
+                    r.recimg,
+                    r.recidclient,
+                    r.rechowmany,
+                    r.rectext,
+                    i.ingname,
+                   jri.joinquantite,
+                    u.uniname
+            FROM recipe r
+            INNER JOIN joinrecdiet jrd ON r.idrecipe = jrd.joinidrecipe
+            INNER JOIN diet d ON jrd.joiniddiet = d.iddiet
+            INNER JOIN joinrecing jri ON jri.joinidrecipe = r.idrecipe
+            INNER JOIN ingredient i ON jri.joinidingredient = i.idingredient
+            INNER JOIN unity u ON jri.joinidunite = u.idunity
+            WHERE idrecipe = (SELECT idrecipe from recipe order by idrecipe desc limit 1)");
         try {
-            $query->execute();
+            $query->execute([
+                "idrecipe" => $idrecipe
+            ]);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public function getRecipeSlug($id){
+        $query = BDD::getInstance()->prepare("SELECT recnameslug FROM recipe WHERE idrecipe = :id LIMIT 1");
+        try {
+            $query->execute([
+                "id" => $id
+            ]);
             return $query->fetch(PDO::FETCH_ASSOC);
         }catch (PDOException $exception){
             return $exception->getMessage();
