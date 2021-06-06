@@ -7,23 +7,26 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="section-listing-header">
+        <h1>Les {{ number }} dernières recettes</h1>
+        <a href="/Recette/add"><strong>Proposer une recette</strong></a>
+    </div>
     <div class="card-container">
         {% for recipe in recipes %}
-            <div class="card">
-                {% if recipe.rechowmany > 1 %}
-                    <h3>{{ recipe.recname }} </h3><span>{{ recipe.rechowmany }} personnes</span>
+            <a class="recipe-card" href="/Recette/oneRecipe/{{ recipe.recnameslug }}">
+                <div class="gradient">
+                    <h2><strong>{{ recipe.recname }}</strong></h2>
+                    <span class="dietname">{{ recipe.dietname }}</span>
+                </div>
+                {% if recipe.recimg is defined and recipe.recimg is not empty %}
+                    <img src="{{ recipe.recimg|trim('.','left') }}" alt="Illustration de la recette {{ recipe.recname }}">
                 {% else %}
-                    <h3>{{ recipe.recname }} </h3>
-                    <span>{{ recipe.rechowmany }} personne</span>
+                    <img src="https://via.placeholder.com/356x177" alt="Image de nourriture">
+                    {# <img src="./uploads/recipe-images/default.png" alt="Image de nourriture"> #}
                 {% endif %}
-                {% if recipe.recimg is defined  %}
-                    <img src="{{ recipe.recimg|trim('.','left') }}" alt="Image de nourriture" class="list-img">
-                 {% else %}
-                     <img src="./uploads/recipe-images/default.png" alt="Image de nourriture" class="list-img">
-                {% endif %}
-                {# Lorsque toutes les recettes auront un slug, changer le idrecipe par recnameslug  #}
-                <a href="/Recette/oneRecipe/{{ recipe.recnameslug }}" class="btn" target="_blank">Moi MANGER !</a>
-            </div>
+            </a>
         {% endfor %}
     </div>
+</div>
 {% endblock %}
