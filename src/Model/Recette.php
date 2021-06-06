@@ -300,7 +300,8 @@ class Recette{
                             r.recnameslug,
                             r.recimg,
                             r.recidclient,
-                            r.rechowmany
+                            r.rechowmany,
+                            d.dietname
             FROM recipe r
             INNER JOIN joinrecdiet jrd ON r.idrecipe = jrd.joinidrecipe
             INNER JOIN diet d ON jrd.joiniddiet = d.iddiet
