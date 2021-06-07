@@ -1,0 +1,37 @@
+@import url('listing.css');
+
+/* Mobile */
+@media screen and (max-width: 375px){
+    .section-listing-header{
+        flex-direction: column;
+        text-align: center;
+    }
+    .card-container{
+        grid-template-columns: 1fr;
+    }
+    .recipe-card > img{
+        width: 90vw;
+    }
+}
+/* Fin Mobile */
+/* Tablette */
+@media screen and (min-width: 768px){
+    .card-container{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .recipe-card{
+        width: 50%;
+    }
+}
+/* Fin Tablette */
+/* Desktop */
+@media screen and (min-width: 1115px){
+    .card-container{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media screen and (min-width: 1700px){
+    .card-container{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
