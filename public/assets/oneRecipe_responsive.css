@@ -1,0 +1,65 @@
+@import "oneRecipe.css";
+/* Mobile */
+@media screen and (max-width: 375px){
+    .recipe-img{
+        height: 126px;
+        width: 100%;
+        border-radius: 10px 0px;
+        margin-bottom: 20px;
+    }
+    .recipe-name,
+    .recipe-people{
+        margin: 0;
+        padding: 0;
+    }
+    .icons{
+        margin-top: 20px;
+        width: 100vw;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .icons div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .icons p {
+        margin-top: 0;
+    }
+    .icons i{
+        font-size: 3em;
+    }
+    .icons .fav i,
+    .icons .fav p{
+        color: #F17E7E;
+    }
+    .icons .share i,
+    .icons .share p{
+        color: #8CC8FF;
+    }
+    .icons .basket i,
+    .icons .basket p{
+        color: #EEA151;
+    }
+    h2{
+        text-align: center;
+        font-size: 1em;
+        text-align: left;
+    }
+    .ingredient-container{
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .recipe{
+        width: 80vw;
+    }
+    .recipe h2{
+        text-align: left;
+        margin-bottom: 0;
+    }
+    .recipe hr{
+        margin-top: 0;
+        border: 2px solid #D6D6D6;
+    }
+}
