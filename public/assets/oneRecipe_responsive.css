@@ -1,6 +1,6 @@
 @import "oneRecipe.css";
 /* Mobile */
-@media screen and (max-width: 375px){
+@media screen and (min-width: 375px){
     .recipe-img{
         height: 126px;
         width: 100%;
@@ -61,5 +61,44 @@
     .recipe hr{
         margin-top: 0;
         border: 2px solid #D6D6D6;
+    }
+    .btn-desktop{
+        display: none;
+    }
+}
+/* Fin mobile */
+/* Tablette */
+@media screen and (min-width: 768px){
+    .recipe-img{
+        margin-top: 20px;
+        width: auto;
+    }
+    .ingredients h2,
+    .ingredient-name,
+    .ingredient-quantity,
+    .recipe h2{
+        font-size: 1.3em;
+        line-height: 1.2;
+    }
+}
+/* Fin Tablette */
+/* Desktop */
+@media screen and (min-width: 1024px){
+    .recipe-img{
+        margin-top: 20px;
+    }
+    .icons{
+        display: none;
+    }
+    .btn-desktop{
+        margin-top: 20px;
+        display: block;
+    }
+    .ingredients h2,
+    .ingredient-name,
+    .ingredient-quantity,
+    .recipe h2{
+        font-size: 1.3em;
+        line-height: 1.2;
     }
 }
