@@ -4,7 +4,7 @@
     align-items: center;
     height: calc(100vh - 80px);
 }
-img {
+.recipe-img {
     height: 300px;
     width: 400px;
 }
