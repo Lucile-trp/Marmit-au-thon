@@ -1,0 +1,145 @@
+/* GENERAL STYLE */
+.orange{
+    background-color: #FB7051;
+    color: #262D35;
+}
+.grey{
+    background-color: #262D35;
+    color:#fff;
+}
+white{
+    background-color: #FFF;
+    color: #262D35;
+}
+.shadow{
+    box-shadow: 0px 7px 8px 0px rgba(119, 119, 119, 0.6);
+    -moz-box-shadow: 0px 7px 8px 0px rgba(119, 119, 119, 0.6);
+    -webkit-box-shadow: 0px 7px 8px 0px rgba(119, 119, 119, 0.6);
+}
+.shadow_bright{
+    box-shadow: 0px 7px 8px 0px rgba(255, 255,255, 0.6);
+    -moz-box-shadow: 0px 7px 8px 0px rgba(119, 119, 119, 0.6);
+    -webkit-box-shadow: 0px 7px 8px 0px rgba(119, 119, 119, 0.6);
+}
+/*.glass{
+    background: linear-gradient(113.36deg, rgba(255, 255, 255, 0.8) 2.97%, rgba(255, 255, 255, 0.6) 45.42%, rgba(255, 255, 255, 0.2) 100%);
+}*/
+
+.content{
+    min-height: 550px;
+
+}
+/* EN DESSOUS DE WIDTH = 600px */
+@media only screen and (max-width: 600px) {
+    .form_all > h1 {
+        font-size: 1.8em;
+    }
+    .form_all{
+        padding: 0 20px 50px 20px;
+    }
+    .content{
+        min-height: 450px;
+
+    }
+}
+.ql-toolbar.ql-snow{
+    background-color: #fff;
+}
+.ql-container.ql-snow{
+    min-height: 100px;
+    background-color: #fff;
+    color: #262D35;
+}
+
+/* A PARTIR DE WIDTH = 768/992/1200px */
+@media screen and (min-width: 768px){
+    .zone_text {
+        min-height: 30px;
+        max-width: 400px;
+        margin: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+    .form_all{
+        padding: 50px 20px 50px 20px;
+    }
+    .ql-toolbar.ql-snow{
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #fff;
+    }
+    .ql-container.ql-snow{
+        width: 70%;
+        min-height: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #fff;
+        color: #262D35;
+    }
+}
+
+@media screen and (min-width: 992px){
+
+}
+
+@media screen and (min-width: 1200px){
+
+}
+
+
+.form_all>h1{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form{
+    max-width: 1200px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding:50px 10px 50px 10px;
+    border-top-left-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+}
+.label_titre{
+    font-weight: bold;
+    padding: 10px;
+}
+
+.btn{
+    min-height: 30px;
+    min-width: 200px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 30px;
+    padding:10px;
+    border: none;
+    border-top-right-radius: 10px 10px;
+    border-bottom-left-radius: 10px 10px;
+}
+.zone_text{
+    min-height: 30px;
+    width: 75%;
+    margin:20px;
+    border:none;
+    border-radius: 5px;
+}
+.zone_text_short{
+    height: 30px;
+    width: 40%;
+    margin:5px;
+    border:none;
+    border-radius: 5px;
+}
+.zone_text_short_mini{
+    height: 30px;
+    width: 20%;
+    margin:5px;
+    border:none;
+    border-radius: 5px;
+}
+.ingredients{
+    padding: 3vh 0;
+}

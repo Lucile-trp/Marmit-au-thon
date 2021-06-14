@@ -1,0 +1,53 @@
+.container{
+    margin: 0 20px 20px;
+}
+.section-listing-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section-listing-header > a{
+    color: #ffffff;
+    background-color: #FB7051;
+    padding: 1em;
+    border-radius: 10px;
+}
+.container > div{
+    color: #FB7051;
+}
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-self: center;
+    row-gap: 20px;
+}
+.recipe-card{
+    height: 177px;
+    width: 356px;
+    position: relative;
+
+}
+.recipe-card > img{
+    height: 177px;
+    width: 356px;
+    border-radius: 10px 0px;
+}
+h2{
+    font-size: 1.5em;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    color: #262D35;
+}
+.gradient{
+    background: linear-gradient(114.03deg, rgba(255, 255, 255, 0.8) 1.8%, rgba(255, 255, 255, 0.2) 99.1%);
+    height: 177px;
+    width: 178px;
+    position: absolute;
+}
+.dietname{
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    color: #262D35;
+}

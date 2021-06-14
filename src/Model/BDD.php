@@ -2,7 +2,6 @@
 
 namespace src\Model;
 use PDO;
-include($_SERVER["DOCUMENT_ROOT"]."/../src/Model/Credentials.php");
 
 class BDD
 {
@@ -26,9 +25,8 @@ class BDD
             $password = $pass;
             $dbname = $db;
 
+            SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';', $username, $password);
 
-
-            SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 

@@ -1,0 +1,92 @@
+{% extends"base.html.twig" %}
+
+{% block title %}{{ recipename }} {{ parent() }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/oneRecipe.css">
+    <link rel="stylesheet" href="/assets/oneRecipe_responsive.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if recipeimg is not defined or recipeimg is empty %}
+            <img class="recipe-img" src="https://via.placeholder.com/360x126" alt="Image de la recette {{ recipename }}">
+        {% else %}
+            <img class="recipe-img" src="{{ recipeimg|trim('.','left') }}" alt="Image de la recette {{ recipename }}">
+        {% endif %}
+        <h1 class="recipe-name">{{ recipename }}</h1>
+        <div class="icons">
+            <div class="fav">
+                <a href="#" class="heart-trigger"><i class="far fa-heart"></i></a>
+                <p>Favoris</p>
+            </div>
+            <div class="share">
+                <a href="#" class="modal-trigger"><i class="fas fa-share"></i></a>
+                <p>Partager</p>
+            </div>
+            <div class="basket">
+                <a href="#"><i class="fas fa-shopping-basket"></i></a>
+                <p>Ajouter au panier</p>
+            </div>
+        </div>
+
+        <div class="ingredients">
+            <h2>Liste des ingredients pour {{ peoples }} personnes</h2>
+            <ul>
+                {% for ingredient in ingredients %}
+                    <li class="ingredient-container">
+                        <div class="ingredient-name">{{ ingredient.ingredientName }}</div>
+                        <div class="ingredient-quantity">{{ ingredient.quantity }} {{ ingredient.unity }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="recipe">
+            <h2>Recette</h2>
+            <hr>
+            {{ recipedesc|raw }}
+        </div>
+        <div class="btn-container btn-desktop">
+            <a class="btn btn-mail modal-trigger">Partager cette recette par mail</a>
+            <a href="/Recette/generatepdf/{{ idrecipe }}" class="btn btn-pdf">Enregistrer cette recette au format PDF</a>
+        </div>
+
+        <div id="modal-mail" class="modal" style="display: none;">
+            <div class="modal-container">
+                <form action="#" method="post">
+                    <label for="destinataire">Adresse mail du destinataire</label>
+                    <input type="mail" name="dest-mail">
+                    <br>
+                    <label for="message">Votre message</label>
+                    <textarea name="message" cols="30" rows="15">
+                        www.marmitothon.local/Recette/oneRecipe/{{ recipeslug }}
+                    </textarea>
+                    <br>
+                    <button type="submit">Donnez faim à vos amis !</button>
+                    <button class="modal-close">Fermer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block javascript%}
+    <script>
+        const modalTrigger = document.querySelector('.modal-trigger')
+        const closeModal = document.querySelector('.modal-close')
+        const modal = document.querySelector('#modal-mail')
+
+        modalTrigger.addEventListener('click', () => {
+        modal.style.display = null
+    })
+        closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
+    })
+
+        const heartTrigger = document.querySelector('.heart-trigger')
+        heartTrigger.addEventListener('click', () =>{
+        let heartIcon = document.querySelector('.fa-heart')
+        heartIcon.classList.remove('far')
+        heartIcon.classList.add('fas')
+    })
+    </script>
+{% endblock javascript %}

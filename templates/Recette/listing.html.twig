@@ -1,0 +1,33 @@
+{% extends"base.html.twig" %}
+
+{% block title %}Liste des recettes {{ parent() }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/listing.css">
+    <link rel="stylesheet" href="/assets/listing_responsive.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="section-listing-header">
+        <h1>Les {{ number }} dernières recettes</h1>
+        <a href="/Recette/add"><strong>Proposer une recette</strong></a>
+    </div>
+    <div class="card-container">
+        {% for recipe in recipes %}
+            <a class="recipe-card" href="/Recette/oneRecipe/{{ recipe.recnameslug }}">
+                <div class="gradient">
+                    <h2><strong>{{ recipe.recname }}</strong></h2>
+                    <span class="dietname">{{ recipe.dietname }}</span>
+                </div>
+                {% if recipe.recimg is defined and recipe.recimg is not empty %}
+                    <img src="{{ recipe.recimg|trim('.','left') }}" alt="Illustration de la recette {{ recipe.recname }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/356x177" alt="Image de nourriture">
+                    {# <img src="./uploads/recipe-images/default.png" alt="Image de nourriture"> #}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

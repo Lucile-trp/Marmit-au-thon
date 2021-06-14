@@ -1,0 +1,23 @@
+{% extends"base.html.twig" %}
+
+{% block title %}Nombre ingrédient {{ parent() }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/form.css">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="form_all">
+            <h1>Ajouter une nouvelle recette</h1>
+            <div class="form orange">
+                    <form name="article" method="post" action="/recette/formAdd" enctype="multipart/form-data">
+                        <label class="label_titre" for="combien">De combien d'ingrédients se compose votre recette ?</label><br>
+                        <input class="zone_text shadow" type="text" name="combien" placeholder="Combien d'ingrédients dans votre recette ?"><br>
+                        <input class="btn white shadow" type="submit" value="Choisir">
+                    </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
