@@ -26,7 +26,10 @@ class BDD
             $dbname = $db;
 
             SELF::$_instance = new PDO('mysql:host=' . $hostname . ';dbname=' . $dbname . ';', $username, $password);
+
             SELF::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
 
         } catch (\Exception $e) {
             SELF::$_instance = 'Erreur : ' . $e->getMessage();

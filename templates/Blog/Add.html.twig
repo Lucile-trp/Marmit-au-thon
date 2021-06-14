@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/blog.css">
+{% endblock %}
+
+{% block title "Blog - Formulaire d'ajout d'un article" %}
+{% block body %}
+    <div class="content">
+        <h1>Ajouter un article...</h1>
+
+        {% if error_message is defined %}
+        <p class="error-message"style="color: red;" >{{ error_message }}</p>
+        {% endif %}
+
+        <form class="grid-form" id="post" method="POST" action="/Blog/addArticle" enctype="multipart/form-data">
+            <div class="row-form row-1">
+                <input type="text" class="form-art-title" name="art-title" placeholder="Veuillez choisir le titre de votre article...">
+            </div>
+            <div class="row-form row-2">
+                <textarea type="text" placeholder="Veuillez choisir le resumé de votre article..."
+                          id="art-form-resume" name="art-resume" rows="4" cols="50"></textarea>
+            </div>
+            <div class="row-form row-3">
+                <!-- Create the editor container -->
+                <div type="text" id="editor">
+                    <p>Veuillez saisir le contenu de <strong>l'article</strong> </p>
+                </div>
+                <textarea name="art-content" style="display:none" id="hiddenArea"></textarea>
+            </div>
+            <div class="row-form row-4">
+                <input type="file" name="article-img" id="article-img">
+            </div>
+
+            <input type="submit" class="article-form-btn-submit" value="Valider">
+        </form>
+        <hr>
+
+        <a class="lien-accueil" href="/">Retourner à l'accueil du site.</a>
+    </div>
+
+
+    <!-- IMPORTS JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- QUILL EDITOR IMPORT -->
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        $("#post").on("submit",function(){
+            $("#hiddenArea").val($("#editor .ql-editor").html());
+        })
+
+    </script>
+{% endblock %}
+
+
