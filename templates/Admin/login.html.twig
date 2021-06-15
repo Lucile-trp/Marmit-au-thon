@@ -1,0 +1,13 @@
+{% include 'base.html.twig' %}
+
+{% block title 'Espace Admin' %}
+
+{% block body %}
+    <form action="/Admin/checkLogin" method="post">
+        <label for="climail">Adresse mail</label>
+        <input type="mail" name="climail" required>
+        <label for="clipassword">Mot de passe</label>
+        <input type="password" name="clipassword" required>
+        <button type="submit">Se connecter</button>
+    </form>
+{% endblock %}
