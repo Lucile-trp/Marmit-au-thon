@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Panier' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/panier.css">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+    <h1>Votre Panier :)</h1>
+        <hr>
+    {% if panier is defined %}
+        {% for data in panier %}
+            <h2 class="title-recette">Nom de la recette : {{ data.recname }}</h2>
+            <h6 class="list-ing-panier">Les ingredients :</h6>
+            <table class="tableau-ing" rules=all>
+                <tr class="first-row-tableau">
+                    <th class="tableau-box">Ingrédient</th>
+                    <th class="tableau-box">Quantité</th>
+                    <th class="tableau-box">Checked</th>
+                </tr>
+            {% for ingredient in data.ingredient %}
+                <tr class="other-row-tableau">
+                    <td class="tableau-box">{{ ingredient.ingname }}</td>
+                    <td class="tableau-box">{{ ingredient.joinquantite }} {{ ingredient.uniname }}</td>
+                    <td class="tableau-box"> <input type="checkbox"></td>
+                </tr>
+            {% endfor %}
+            </table>
+            <hr>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

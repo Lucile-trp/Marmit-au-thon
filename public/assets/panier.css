@@ -1,0 +1,17 @@
+.content{
+    margin: 20px 100px;
+}
+
+/* TABLEAU */
+.title-recette{
+    color: #FB7051;
+}
+
+.tableau-ing{
+    border: solid 1px black;
+}
+
+.tableau-box{
+    padding: 10px 15px;
+    text-align: center;
+}
