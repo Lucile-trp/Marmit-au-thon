@@ -132,13 +132,19 @@ class Recette{
      * @param Int $id
      */
     public function getRecipeFromId(PDO $bdd, Int $id){
-        $query = "SELECT * FROM recipe WHERE idrecipe = :id";
+        $query = "SELECT r.recname, r.recnameslug, ingname, joinquantite, uniname 
+                    FROM recipe r
+                    INNER JOIN joinrecing jri ON jri.joinidrecipe = r.idrecipe
+                    INNER JOIN ingredient i ON jri.joinidingredient = i.idingredient
+                    INNER JOIN unity u ON jri.joinidunite = u.idunity
+                    WHERE idrecipe = :id";
 
         $stmt = $bdd->prepare($query);
-        $stmt->bindValue(":id", $this->getIdrecipe(), PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }catch (Exception $e){
             echo $e->getMessage();
         }
