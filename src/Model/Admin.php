@@ -1,9 +1,8 @@
 <?php
 
-use PDO;
-
 namespace src\Model;
 
+use PDO;
 
 class Admin
 {
@@ -109,12 +108,12 @@ class Admin
      * Vérifie sur l'utilisateur à la rôle admin
      */
     public function isAdmin($climail){
-        $query = "SELECT climail from client where cliadmin = 1 AND climail = :climail";
+        $query = BDD::getInstance()->prepare("SELECT climail from client where cliadmin = 1 AND climail = :climail");
 
         try {
             $query->bindParam(':climail', $climail, PDO::PARAM_INT);
-            $query->execute();
-            return $query->fetchColumn();
+
+            return $query->execute();
         }catch (PDOException $exception){
             return $exception->getMessage();
         }
@@ -126,11 +125,11 @@ class Admin
      * Retourne un tableau associatif d'un compte admin
      */
     public function getAdminAccount($climail){
-        $query = BDD::getInstance()->prepare("SELECT climail,clipassword FROM client WHERE climail = :climail AND cliadmin = 1")
+        $query = BDD::getInstance()->prepare("SELECT climail, clipassword FROM client WHERE climail = :climail AND cliadmin = 1");
         try {
-            $query->bindParam(":climail", $climail, PDO::PARAM_STR);
+            $query->bindParam(':climail', $climail, PDO::PARAM_STR);
             $query->execute();
-            return $query->fetchColumn();
+            return $query->fetch(PDO::FETCH_ASSOC);
         }catch (PDOException $exception){
             return $exception->getMessage();
         }
@@ -141,12 +140,23 @@ class Admin
      * Retourne tous les clients présent en base de données
      */
     public function getAllClients(){
-        $query = "SELECT idclient, cliusername, climail from client";
+        $query = BDD::getInstance()->prepare("SELECT idclient, cliusername, climail FROM client WHERE cliadmin = 0");
 
         try {
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public function deleteUserById($id){
+        $query = BDD::getInstance()->prepare("DELETE FROM client WHERE idclient = :id");
+
+        try {
+            $query->bindParam(":id",$id,PDO::PARAM_INT);
+            return $query->execute();
+        }catch (\PDOException $exception){
             return $exception->getMessage();
         }
     }

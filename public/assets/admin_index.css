@@ -1,0 +1,27 @@
+.container{
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+}
+table{
+    max-height: 70%;
+}
+th{
+    font-size: 20px;
+}
+
+tbody tr{
+    margin-bottom: 10px;
+    border-bottom: solid #262D35 2px;
+}
+tbody tr td{
+    font-size: 18px;
+    padding-left: 50px;
+}
+.btn-delete{
+    text-decoration: none;
+    padding: .3em 1em;
+    background-color: #FB7051;
+    border-radius: 9px;
+    color: white;
+}

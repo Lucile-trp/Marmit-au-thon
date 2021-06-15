@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Accueil Admin Marmitothon' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/admin_index.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID Client</th>
+            <th>Nom d'utilisateur</th>
+            <th>Adresse mail</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.idclient }}</td>
+                <td>{{ client.cliusername }}</td>
+                <td>{{ client.climail }}</td>
+                <td><a href="/Admin/deleteUser/{{ client.idclient }}" class="btn-delete">Supprimer l'utilisateur</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
