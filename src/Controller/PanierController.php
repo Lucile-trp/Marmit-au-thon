@@ -8,7 +8,9 @@ use src\Model\BDD;
 class PanierController extends AbstractController {
     public function index(){
         session_start();
-
+        if (!isset($_SESSION['panier'])){
+            $_SESSION['panier'] = null;
+        }
         return $this->twig->render("Panier/panier.html.twig",  [
             "panier" => $_SESSION['panier']
         ]);
@@ -24,6 +26,7 @@ class PanierController extends AbstractController {
         $recipe = Recette::getRecipeFromId($bdd, $id);
 
         $_SESSION['panier'][$id] = array(
+            'id' => $id,
             'recname'=> $recipe[0]['recname'],
             'ingredient' => []
         );
@@ -36,9 +39,23 @@ class PanierController extends AbstractController {
             );
             array_push($_SESSION['panier'][$id]['ingredient'], $temparraying);
         }
-        return $this->twig->render("Panier/panier.html.twig", [
-            "panier" => $_SESSION['panier']
-        ]);
+        header('Location: /Recette/listing' );
+    }
+
+    //Reset tout le panier
+    public function resetPanier(){
+        session_start();
+        unset($_SESSION['panier']);
+        header('Location: /Panier/index');
+    }
+
+    //Enlève une recette et ses ingrédients du panier
+    public function unsetOne($id){
+        session_start();
+        unset($_SESSION['panier'][$id]);
+        header('Location: /Panier/index');
+
+
     }
 
 
