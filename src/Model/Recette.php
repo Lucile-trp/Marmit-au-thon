@@ -324,4 +324,33 @@ class Recette{
             return $exception->getMessage();
         }
     }
+
+    public function getRecipeByIdRecipe($idrecipe){
+        $query = BDD::getInstance()->prepare("
+            SELECT 	r.idrecipe,
+                    r.recname,
+                    r.recnameslug,
+                    r.recimg,
+                    r.recidclient,
+                    r.rechowmany,
+                    r.rectext,
+                    i.ingname,
+                    jri.joinquantite,
+                    u.uniname
+            FROM recipe r
+            INNER JOIN joinrecdiet jrd ON r.idrecipe = jrd.joinidrecipe
+            INNER JOIN diet d ON jrd.joiniddiet = d.iddiet
+            INNER JOIN joinrecing jri ON jri.joinidrecipe = r.idrecipe
+            INNER JOIN ingredient i ON jri.joinidingredient = i.idingredient
+            INNER JOIN unity u ON jri.joinidunite = u.idunity
+            WHERE idrecipe = :idrecipe");
+
+        try {
+            $query->bindParam(':idrecipe', $idrecipe, PDO::PARAM_INT);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+    }
 }
