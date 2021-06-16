@@ -73,7 +73,7 @@ class AdminController extends AbstractController
             $blog = new Blog();
             $recipe = new Recette();
             return $this->twig->render("/Admin/index.html.twig", [
-                "customers" => $admin->getAllClients(),
+                "customers" => $admin->getAllActivesClients(),
                 "articles" => $blog->getAll(),
                 "recipes" => $recipe->getAllRecipes()
             ]);

@@ -138,10 +138,13 @@ class Admin
 
     /**
      * @return mixed|string
-     * Retourne tous les clients présent en base de données
+     * Retourne tous les clients actifs présent en base de données
      */
-    public function getAllClients(){
-        $query = BDD::getInstance()->prepare("SELECT idclient, cliusername, climail FROM client WHERE cliadmin = 0");
+    public function getAllActivesClients(){
+        $query = BDD::getInstance()->prepare("SELECT idclient, cliusername, climail 
+                                              FROM client 
+                                              WHERE cliadmin = 0
+                                              AND LOWER(cliusername) NOT LIKE 'anonyme%'");
 
         try {
             $query->execute();
@@ -151,12 +154,20 @@ class Admin
         }
     }
 
+    /**
+     * @param $id
+     * @return string
+     * Anonymise un utilisateur (ne le supprime pas pour garder ses recettes)
+     */
     public function deleteUserById($id){
-        $query = BDD::getInstance()->prepare("DELETE FROM client WHERE idclient = :id");
-
+        $query = BDD::getInstance()->prepare("UPDATE client 
+                                              SET cliusername = CONCAT('Anonyme',:id),
+                                                  climail = CONCAT('anonyme',:id,'@ano.fr')
+                                              WHERE idclient = :id ");
         try {
             $query->bindParam(":id",$id,PDO::PARAM_INT);
-            return $query->execute();
+            $query->execute();
+            return true;
         }catch (\PDOException $exception){
             return $exception->getMessage();
         }
