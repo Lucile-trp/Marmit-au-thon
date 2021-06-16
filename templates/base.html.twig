@@ -14,8 +14,31 @@
 
 <header>
     <section class="header-container">
-        <a href="/" ><img id="logotype" src="/uploads/marmit_au_thon-05.svg" />
-            <img id="logotype2" src="/uploads/marmit_au_thon-02.svg"/></a>
+        <!-- Menu Burger -->
+        <nav role="navigation" class="nav-small">
+            <div id="menuBurger">
+                <input type="checkbox" />
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <ul id="menu">
+                    <a href="/"><li>Accueil</li></a>
+                    <a href="#"><li>Recettes</li></a>
+                    <a href="/Blog/index"><li>Blog</li></a>
+                    <a href="/Panier/index"><li>Panier</li></a>
+                    <a href="#"><li>Se connecter</li></a>
+                    <a href="#"><li>Administration</li></a>
+                </ul>
+            </div>
+        </nav>
+        <!-- Fin menu burger -->
+
+        <a href="/" >
+            <img id="logotype" src="/uploads/marmit_au_thon-05.svg" />
+            <img id="logotype2" src="/uploads/marmit_au_thon-02.svg"/>
+        </a>
         <div id="search-bar" class="search-bar" >
             <form id="form-header" method="post">
                 <input id="form-input-search" type="text" placeholder="Que voulez vous manger ?">
@@ -23,12 +46,13 @@
             </form>
         </div>
         <div id="separator-vertical"></div>
-        <nav>
+        <nav class="nav-lg">
             <ul>
                 <li><a class="list-header" href="/Blog/index">Blog</a></li>
                 <li><a class="list-header" href="/Recette/listing">Recettes</a></li>
                 <li><a class="list-header" href="/Panier/index">Panier</a></li>
                 <li><a class="list-header" href="/Client/login">Connexion</a></li>
+                <li><a class="list-header" href="#">Admin</a></li>
             </ul>
         </nav>
     </section>
