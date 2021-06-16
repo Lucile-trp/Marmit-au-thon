@@ -8,25 +8,66 @@
 
 {% block body %}
 <div class="container">
-    <table>
-        <thead>
+    <h1>Liste des clients</h1>
+    <table id="customers">
         <tr>
             <th>ID Client</th>
-            <th>Nom d'utilisateur</th>
+            <th>Pseudo</th>
             <th>Adresse mail</th>
             <th>Action</th>
         </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
+        {% for customer in customers %}
             <tr>
-                <td>{{ client.idclient }}</td>
-                <td>{{ client.cliusername }}</td>
-                <td>{{ client.climail }}</td>
-                <td><a href="/Admin/deleteUser/{{ client.idclient }}" class="btn-delete">Supprimer l'utilisateur</a></td>
+                <td>{{ customer.idclient }}</td>
+                <td>{{ customer.cliusername }}</td>
+                <td>{{ customer.climail }}</td>
+                <td><a href="/Admin/deleteUser/{{ customer.idclient }}" class="btn-delete">Supprimer l'utilisateur</a></td>
             </tr>
         {% endfor %}
-        </tbody>
+    </table>
+    <hr>
+    <h1>Liste des articles de blog</h1>
+    <table id="customers">
+        <tr>
+            <th>ID Article</th>
+            <th>Titre Article</th>
+            <th>Date de création</th>
+            <th colspan="2">Actions</th>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.art_id }}</td>
+                <td>{{ article.art_title }}</td>
+                <td>{{ article.art_date|date("d/m/Y") }} à {{ article.art_date|date("H:m:s") }}</td>
+                <td><a href="/Admin/deleteArticle/{{ article.art_id }}" class="btn-delete">Supprimer l'article</a></td>
+                <td><a href="/Blog/detail/{{ article.art_slug }}" class="btn-delete" target="_blank">Voir l'article</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <h1>Liste des recettes</h1>
+    <table id="customers">
+        <tr>
+            <th>ID Recette</th>
+            <th>Titre recette</th>
+            <th>ID client</th>
+            <th>type de diet</th>
+            <th colspan="2">Action</th>
+        </tr>
+        {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe.idrecipe }}</td>
+                <td>{{ recipe.recname }}</td>
+                {% if recipe.recidclient is not defined or recipe.recidclient is empty %}
+                    <td>Utilisateur non trouvé</td>
+                {% else %}
+                <td>{{ recipe.recidclient }}</td>
+                {% endif %}
+                <td>{{ recipe.dietname }}</td>
+                <td><a href="/Admin/deleteRecipe/{{ recipe.idrecipe }}" class="btn-delete">Supprimer la recette</a></td>
+                <td><a href="/Recette/oneRecipe/{{ recipe.recnameslug }}" class="btn-delete">Voir la recette</a></td>
+            </tr>
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

@@ -125,11 +125,12 @@ class Admin
      * Retourne un tableau associatif d'un compte admin
      */
     public function getAdminAccount($climail){
-        $query = BDD::getInstance()->prepare("SELECT climail, clipassword FROM client WHERE climail = :climail AND cliadmin = 1");
+        $query = BDD::getInstance()->prepare("SELECT idclient, cliusername, climail, clipassword FROM client WHERE climail = :climail AND cliadmin = 1");
         try {
             $query->bindParam(':climail', $climail, PDO::PARAM_STR);
             $query->execute();
-            return $query->fetch(PDO::FETCH_ASSOC);
+            $datas = $query->fetch(PDO::FETCH_ASSOC);
+            return $datas;
         }catch (PDOException $exception){
             return $exception->getMessage();
         }
