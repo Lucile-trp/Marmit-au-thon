@@ -4,6 +4,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="/assets/admin_index.css">
+    <link rel="stylesheet" href="/assets/admin_index_responsive.css">
 {% endblock %}
 
 {% block body %}
@@ -65,7 +66,11 @@
                 {% endif %}
                 <td>{{ recipe.dietname }}</td>
                 <td><a href="/Admin/deleteRecipe/{{ recipe.idrecipe }}" class="btn-delete">Supprimer la recette</a></td>
-                <td><a href="/Recette/oneRecipe/{{ recipe.recnameslug }}" class="btn-delete">Voir la recette</a></td>
+                {% if recipe.recnameslug is defined and recipe.recnameslug is not empty %}
+                    <td><a href="/Recette/oneRecipe/{{ recipe.recnameslug }}" class="btn-delete" target="_blank">Voir la recette</a></td>
+                {% else %}
+                    <td>Lien de la recette non fonctionnel</td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
