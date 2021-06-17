@@ -1,4 +1,54 @@
 {% extends "base.html.twig" %}
+
+{% block title %}Marmit'o'thon{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/accueil.css">
+    <!--<link rel="stylesheet" href="/assets/listing_responsive.css">-->
+{% endblock %}
 {% block body %}
-    <h1>Page d'accueil de marmitothon</h1>
+    <div class="container">
+    <div class="recette">
+        <div class="section-listing-header">
+            <h1>Les dernières recettes</h1>
+            <!-- <a href="/Recette/add"><strong>Proposer une recette</strong></a>-->
+        </div>
+        <div class="card-container">
+            {% for recipe in recipes %}
+                <a class="recipe-card" href="/Recette/oneRecipe/{{ recipe.recnameslug }}">
+                    <div class="gradient">
+                        <h2><strong>{{ recipe.recname }}</strong></h2>
+                        <span class="dietname">{{ recipe.dietname }}</span>
+                    </div>
+                    {% if recipe.recimg is defined and recipe.recimg is not empty %}
+                        <img src="{{ recipe.recimg|trim('.','left') }}" alt="Illustration de la recette {{ recipe.recname }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/356x177" alt="Image de nourriture">
+                        {# <img src="./uploads/recipe-images/default.png" alt="Image de nourriture"> #}
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="article_container">
+        <div class="section-listing-header">
+            <h1>Articles</h1>
+        </div>
+            {% for article in articles %}
+                <div class="card">
+                    <h2 class="article-title">{{ article.art_title }}</h2>
+
+                    <div class="card-column">
+                        {% if article.art_image is defined %}
+                           <div class="image"><img src="{{  article.art_image|trim('.','left') }}" alt="image de l'article" ></div>
+                        {% else %}
+                            <img src="http://placekitten.com/200/200">
+                        {% endif %}
+                    </div>
+                    <hr>
+                </div>
+            {% endfor %}
+        <a class="article-lien-detail" href="/Blog/index">Voir plus...</a>
+    </div>
+    </div>
 {% endblock %}

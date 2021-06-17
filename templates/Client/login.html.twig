@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Hello je suis la page d'inscription</h1>
+    <form action="/Client/loginClient" method="post">
+        <label for="climail">Adresse mail</label>
+        <input type="email" name="climail" required>
+        <label for="clipassword">Mot de passe</label>
+        <input type="password" name="clipassword" required>
+        <button type="submit">Se connecter</button>
+    </form>
+{% endblock %}
