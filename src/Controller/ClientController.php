@@ -35,6 +35,14 @@ class ClientController extends AbstractController
     }
 
     /**
+     * Déconnecte l'utilisateur et supprime sa session
+     */
+    public function logout(){
+        session_unset();
+        header("Location: /");
+    }
+
+    /**
      *  Insert un utilisateur en base de données
      */
     public function insert(){
