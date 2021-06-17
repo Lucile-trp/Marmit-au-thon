@@ -1,0 +1,133 @@
+/*@import url('listing.css');*/
+.container{
+    width: 100%;
+}
+.section-listing-header{
+    color: #FB7051;
+    border-bottom: 3px solid #FB7051;
+}
+.article_container{
+    margin:10px;
+}
+.card{
+    width: 400px;
+    position: relative;
+}
+.image img{
+    width: 356px;
+    height: 177px;
+    border-radius: 10px 0px;
+    object-fit: cover;
+}
+.image{
+
+}
+.recette{
+    width: 100%;
+    margin: 0 20px 20px;
+}
+.section-listing-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section-listing-header > a{
+    color: #ffffff;
+    background-color: #FB7051;
+    padding: 1em;
+    border-radius: 10px;
+}
+.recette > div{
+}
+.card-container{
+    justify-self: center;
+    row-gap: 20px;
+}
+.recipe-card{
+    max-height: 177px;
+    max-width: 356px;
+    min-height: 100px;
+    position: relative;
+
+}
+.recipe-card > img{
+    height: 177px;
+    width: 356px;
+    border-radius: 10px 0px;
+}
+h2{
+    font-size: 1.5em;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    color: #262D35;
+}
+
+h2.article-title{
+    position: relative;
+    left: 0;
+}
+.gradient{
+    background: linear-gradient(114.03deg, rgba(255, 255, 255, 0.8) 1.8%, rgba(255, 255, 255, 0.2) 99.1%);
+    height: 177px;
+    width: 178px;
+    position: absolute;
+}
+.dietname{
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    color: #262D35;
+}
+
+/* Mobile */
+@media screen and (min-width: 375px){
+    .section-listing-header{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .recipe-card > img{
+
+    }
+    .card-container{
+        text-align: center;
+    }
+
+/* Fin Mobile */
+/* Tablette */
+@media screen and (min-width: 768px){
+    .card-container{
+        text-align: center;
+    }
+    .recipe-card{
+        width: 50%;
+    }
+    .container{
+        display: flex;
+        flex-direction: row;
+    }
+}
+}
+/* Fin Tablette */
+/* Desktop */
+@media screen and (min-width: 1115px){
+    .card-container{
+        justify-self: center;
+        row-gap: 20px;
+    }
+    .container{
+        display: flex;
+        flex-direction: row;
+    }
+}
+@media screen and (min-width: 1700px){
+    .card-container{
+
+    }
+    .container{
+        display: flex;
+        flex-direction: row;
+    }
+}
+/* Fin Desktop */
