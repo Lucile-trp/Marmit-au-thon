@@ -18,9 +18,6 @@ h2{
 .btn-container {
     display: flex;
 }
-.btn-container .btn:last-child{
-    margin-left: 20px;
-}
 .btn{
     color: #FFF;
     background-color: #FB7051;
