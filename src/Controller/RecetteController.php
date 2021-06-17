@@ -4,6 +4,7 @@ namespace src\Controller;
 use src\Model\Recette;
 use src\Model\Diet;
 use src\Model\Unity;
+use src\Model\Client;
 use Dompdf\Dompdf;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -108,6 +109,21 @@ class RecetteController extends AbstractController {
         ]);
     }
 
+    public function send_mail(){
+        ini_set('SMTP','localhost');
+        ini_set('smtp_port','25');
+        try {
+            $mailTest = mail(
+                'toto@gmail.com',
+                'Test mail',
+                'ceci est un message',
+                'From: test@marmitothon.fr'
+            );
+            echo "C'est bon";
+        }catch (\Exception $e){
+            echo $e->getMessage();
+        }
+    }
     /**
      * Affiche une page avec un ensemble de recette
      */
