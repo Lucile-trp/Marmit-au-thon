@@ -7,7 +7,7 @@ use src\Model\Blog;
 class HomeController extends AbstractController
 {
     public function index(){
-        $number = 8;
+        $number = 9;
         $recipe = new Recette();
         // Le paramètre est le nom de recettes que l'ont veut afficher sur la page
         $recipes = $recipe->getRecipes($number);
