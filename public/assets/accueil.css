@@ -7,7 +7,6 @@
 }
 .section-listing-header{
     color: #FB7051;
-    border-bottom: 3px solid #FB7051;
 }
 
 .article_container{
@@ -61,6 +60,7 @@
     height: 177px;
     width: 356px;
     border-radius: 10px 0px;
+    object-fit: cover;
 }
 h2{
     font-size: 1.5em;
