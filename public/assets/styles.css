@@ -9,6 +9,134 @@ body{
 
 /* HEADER */
 
+/* MENU BURGER SMALL*/
+
+#menuBurger
+{
+    display: block;
+    position: absolute;
+    top: 18px;
+    left: 25px;
+    z-index: 1;
+}
+
+#menuBurger a
+{
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+#menuBurger a:hover
+{
+    color: tomato;
+}
+
+
+#menuBurger input
+{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuBurger span
+{
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: #FB7051;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+    opacity 0.55s ease;
+}
+
+#menuBurger span:first-child
+{
+    transform-origin: 0% 0%;
+}
+
+#menuBurger span:nth-last-child(2)
+{
+    transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuBurger input:checked ~ span
+{
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #FB7051;
+}
+
+#menuBurger input:checked ~ span:nth-last-child(3)
+{
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuBurger input:checked ~ span:nth-last-child(2)
+{
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu
+{
+    position: absolute;
+    width: 200px;
+    margin: -100px 0 0 -50px;
+    text-align: left;
+    padding: 50px;
+    padding-top: 125px;
+    border-radius: 30px;
+
+    background: #474645;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+#menuBurger input:checked ~ ul
+{
+    transform: none;
+}
+
+/* MENU BURGER SMALL END*/
+
 .header-container {
     display: flex;
     flex-direction: column;
@@ -18,7 +146,7 @@ body{
 }
 
 #logotype {
-    width: 120px;
+    width: 150px;
     margin-top: 6px;
 }
 #logotype2{
@@ -71,14 +199,14 @@ hr {
 
 h6 {
     margin: 25px 0px 0px 0px;
-    font-size: 1em ;
+    font-size: 1.2em ;
     font-weight: 500;
 }
 
 .list-footer{
     text-decoration: none;
     color: white;
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 300;
 }
 
@@ -96,7 +224,7 @@ ul {
 }
 
 li{
-    line-height: 14px;
+    line-height: 20px;
 }
 
 .footer-container {
@@ -150,26 +278,33 @@ h6{
 
 @media only screen and (max-width: 600px){
     /* HEADER */
-
-    .header-container nav {
+    .header-container .nav-lg {
         display: none;
     }
 
-
+    .header-container .nav-small {
+        display: flex;
+    }
 
 }
 /* PETITS : ENTRE DEUX == 600 px */
 @media only screen and (min-width: 600px) {
 
     /* HEADER */
-    .header-container nav {
+    .header-container .nav-lg {
         display : none;
+    }
+
+    .header-container .nav-small {
+        display: block;
     }
 
 }
 
 /* MEDIUM : TABLETTE == 768px */
 @media only screen and (min-width: 768px) {
+
+
 
     /* FOOTER */
     .footer-container{
@@ -200,8 +335,8 @@ h6{
 
     #logotype2{
         display: block;
-        margin-left: 60px;
-        margin-right: 60px;
+        margin-left: 50px;
+        margin-right: 50px;
         width: 120px;
         margin-top: 6px;
     }
@@ -218,19 +353,23 @@ h6{
         width: 100%;
     }
 
-    .header-container nav {
+    .header-container .nav-small {
+        display: none;
+    }
+
+    .header-container .nav-lg {
         margin-right: 60px;
         display : block;
     }
 
-    .header-container nav ul{
+    .header-container .nav-lg ul{
         display: flex;
         flex-direction: row;
     }
     .header-container li {
         background-color: white;
-        width: 80px;
-        height : 25px ;
+        width: 75px;
+        height : 32px ;
         margin: auto 10px;
         text-align: center;
         border-radius: 5px 0px;
