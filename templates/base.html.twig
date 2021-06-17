@@ -55,6 +55,9 @@
                 <li><a class="list-header" href="/Panier/index">Panier</a></li>
                 <li><a class="list-header" href="/Client/login">Connexion</a></li>
                 <li><a class="list-header" href="/Admin/login">Admin</a></li>
+                {% if session is defined and session is not empty %}
+                    <li><a class="list-header" href="/Client/logout">Déconnexion</a></li>
+                {% endif %}
             </ul>
         </nav>
     </section>

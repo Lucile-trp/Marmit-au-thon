@@ -14,7 +14,9 @@
         {% if error_message is defined %}
             <p class="error-message">{{ error_message }}</p>
         {% endif %}
+        {% if session_admin is defined and session_admin is not empty %}
         <a class="lien-addform" href="/Blog/addForm">+ Ajouter un article.</a>
+        {% endif %}
         <div class="grid">
             {% for article in articles %}
             <div class="card">

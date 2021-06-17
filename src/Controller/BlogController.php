@@ -5,9 +5,13 @@ use src\Model\Blog;
 class BlogController extends AbstractController
 {
     public function index(){
+        //Définit le nom de la session avant de la démarrer
+        session_name("admin");
+        session_start();
         $article = Blog::getAll();
         return $this->twig->render("Blog/blog.html.twig", [
-            "articles" => $article
+            "articles" => $article,
+            "session" => $_SESSION,
         ]);
     }
 
