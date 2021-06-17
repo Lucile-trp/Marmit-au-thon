@@ -1,11 +1,15 @@
 /*@import url('listing.css');*/
+
 .container{
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 .section-listing-header{
     color: #FB7051;
     border-bottom: 3px solid #FB7051;
 }
+
 .article_container{
     margin:10px;
 }
@@ -24,7 +28,7 @@
 }
 .recette{
     width: 100%;
-    margin: 0 20px 20px;
+    margin: 10px;
 }
 .section-listing-header{
     display: flex;
@@ -43,10 +47,13 @@
     justify-self: center;
     row-gap: 20px;
 }
+.card-container-article{
+
+}
 .recipe-card{
     max-height: 177px;
     max-width: 356px;
-    min-height: 100px;
+    margin: 10px;
     position: relative;
 
 }
@@ -81,53 +88,70 @@ h2.article-title{
 }
 
 /* Mobile */
-@media screen and (min-width: 375px){
-    .section-listing-header{
+@media screen and (max-width: 768px) {
+    .section-listing-header {
         flex-direction: column;
         text-align: center;
     }
 
-    .recipe-card > img{
+    .recipe-card > img {
 
     }
-    .card-container{
+
+    .container {
+        display: block;
+    }
+
+    .card-container {
+        max-width: 356px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
         text-align: center;
     }
-
+}
 /* Fin Mobile */
 /* Tablette */
 @media screen and (min-width: 768px){
     .card-container{
-        text-align: center;
+        max-width: 356px;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        margin: auto;
     }
     .recipe-card{
-        width: 50%;
+        max-width: 356px;
     }
-    .container{
-        display: flex;
-        flex-direction: row;
-    }
-}
+
+
 }
 /* Fin Tablette */
 /* Desktop */
 @media screen and (min-width: 1115px){
     .card-container{
+        max-width: 700px;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
         justify-self: center;
         row-gap: 20px;
     }
-    .container{
-        display: flex;
-        flex-direction: row;
+
+    .section-listing-header h1{
+        width: 60%;
     }
+
 }
 @media screen and (min-width: 1700px){
+    .section-listing-header h1{
+        width: 60%;
+    }
     .card-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        justify-self: center;
+        row-gap: 20px;
+    }
 
-    }
-    .container{
-        display: flex;
-        flex-direction: row;
-    }
 }
 /* Fin Desktop */
