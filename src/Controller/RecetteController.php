@@ -128,14 +128,12 @@ class RecetteController extends AbstractController {
      * Affiche une page avec un ensemble de recette
      */
     public function listing(){
-        $number = 50;
         $recipe = new Recette();
         // Le paramètre est le nom de recettes que l'ont veut afficher sur la page
-        $recipes = $recipe->getRecipes($number);
+        $recipes = $recipe->getRecipes();
 
         return $this->twig->render("Recette/listing.html.twig",[
             "recipes" => $recipes,
-            "number" => $number
         ]);
     }
 

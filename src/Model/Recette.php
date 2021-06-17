@@ -314,10 +314,9 @@ class Recette{
     }
 
     /**
-     * @param $number
      * Affiche le nombre de recette donné en paramètre sur la page de listing
      */
-    public function getRecipes($number){
+    public function getRecipes(){
         $query = BDD::getInstance()->prepare("
             SELECT DISTINCT r.idrecipe,
                             r.recname,
@@ -332,10 +331,8 @@ class Recette{
             INNER JOIN joinrecing jri ON jri.joinidrecipe = r.idrecipe
             INNER JOIN ingredient i ON jri.joinidingredient = i.idingredient
             INNER JOIN unity u ON jri.joinidunite = u.idunity
-            ORDER BY idrecipe DESC
-            LIMIT :limit");
+            ORDER BY idrecipe DESC");
         try {
-            $query->bindParam(':limit', $number, PDO::PARAM_INT);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }catch (PDOException $exception){
