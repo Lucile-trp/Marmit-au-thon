@@ -41,18 +41,9 @@ class AdminController extends AbstractController
         $isAdmin = $admin->isAdmin($mail);
 
         if ($isAdmin === true && $checkPassword === true){
-            session_unset();
-            session_start();
-
-            $_SESSION["admin"] = [
-                "id" => $admin->getAdminAccount($mail)["idclient"],
-                "name" => $admin->getAdminAccount($mail)["cliusername"],
-                "mail" => $admin->getAdminAccount($mail)["climail"]
-            ];
-
             header("Location: /Admin/index");
         }else{
-            return header("Location: /Admin/login");
+            header("Location: /Admin/login");
         }
     }
 
