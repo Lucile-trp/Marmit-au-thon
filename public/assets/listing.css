@@ -31,7 +31,6 @@
     height: 177px;
     width: 356px;
     border-radius: 10px 0px;
-    object-fit: cover;
 }
 h2{
     font-size: 1.5em;
@@ -48,7 +47,7 @@ h2{
 }
 .dietname{
     position: absolute;
-    top: 80px;
+    top: 120px;
     left: 20px;
     color: #262D35;
 }
