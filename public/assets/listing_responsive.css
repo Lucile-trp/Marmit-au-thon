@@ -1,12 +1,13 @@
 @import url('listing.css');
 
 /* Mobile */
-@media screen and (max-width: 375px){
+@media screen and (max-width: 768px){
     .section-listing-header{
         flex-direction: column;
         text-align: center;
     }
     .card-container{
+        margin-top: 20px;
         grid-template-columns: 1fr;
     }
     .recipe-card > img{

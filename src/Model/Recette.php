@@ -130,6 +130,7 @@ class Recette{
     /**
      * @param PDO $bdd
      * @param Int $id
+     * @return array
      */
     public function getRecipeFromId(PDO $bdd, Int $id){
         $query = "SELECT r.recname, r.recnameslug, ingname, joinquantite, uniname 
@@ -150,7 +151,7 @@ class Recette{
         }
 
     }
-    //RECUPERER tous les ingrédients de la recette via son id
+
     public function getIngredient(PDO $bdd, Int $id){
         $query = "SELECT ingname, joinquantite, uniname FROM ingredient INNER JOIN joinrecing
                     ON idingredient=joinidingredient INNER JOIN unity
@@ -169,6 +170,18 @@ class Recette{
     return $stmt->fetchAll();
     }
 
+    /**
+     * @param $recipename
+     * @param $recipeImage
+     * @param $howmany
+     * @param $iddiet
+     * @param array $ingredients
+     * @param array $quantity
+     * @param array $units
+     * @param $recipestep
+     * @return string
+     * Insert une recette complète en base données
+     */
     public function insertRecipe($recipename,$recipeImage,$howmany,$iddiet,array $ingredients,array $quantity,array $units,$recipestep){
         //Insertion de la recette dans la table recipe
         $requete1 = BDD::getInstance()->prepare("INSERT INTO recipe (recname, recnameslug, recimg, rechowmany, rectext)
@@ -249,6 +262,11 @@ class Recette{
         }
     }
 
+    /**
+     * @param $slug
+     * @return string
+     * Récupère une recette complète par rapport à son slug
+     */
     public function getRecipeBySlug($slug){
         $query = BDD::getInstance()->prepare("
             SELECT 	r.idrecipe,
@@ -325,6 +343,11 @@ class Recette{
         }
     }
 
+    /**
+     * @param $idrecipe
+     * @return string
+     * Récupère une recette complète par rapport à son ID
+     */
     public function getRecipeByIdRecipe($idrecipe){
         $query = BDD::getInstance()->prepare("
             SELECT 	r.idrecipe,
@@ -349,6 +372,51 @@ class Recette{
             $query->bindParam(':idrecipe', $idrecipe, PDO::PARAM_INT);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    /**
+     * @return string
+     * Récupére toutes les recettes
+     */
+    public function getAllRecipes(){
+        $query = BDD::getInstance()->prepare("            
+            SELECT DISTINCT r.idrecipe,
+                            r.recname,
+                            r.recnameslug,
+                            r.recimg,
+                            r.recidclient,
+                            r.rechowmany,
+                            d.dietname
+            FROM recipe r
+            INNER JOIN joinrecdiet jrd ON r.idrecipe = jrd.joinidrecipe
+            INNER JOIN diet d ON jrd.joiniddiet = d.iddiet
+            INNER JOIN joinrecing jri ON jri.joinidrecipe = r.idrecipe
+            INNER JOIN ingredient i ON jri.joinidingredient = i.idingredient
+            INNER JOIN unity u ON jri.joinidunite = u.idunity
+            ORDER BY idrecipe DESC");
+
+        try {
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    /**
+     * @param $id
+     * @return string
+     * Supprime une recette par rapport à son ID
+     */
+    public function deleteRecipe($id){
+        $query = BDD::getInstance()->prepare("DELETE FROM recipe WHERE idrecipe = :id");
+        try {
+            $query->bindParam(":id", $id, PDO::PARAM_INT);
+            $query->execute();
+            return true;
         }catch (PDOException $exception){
             return $exception->getMessage();
         }

@@ -1,0 +1,25 @@
+.container h1{
+    margin-left: 50px;
+}
+#customers {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto 20px auto;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FB7051;
+    color: white;
+}

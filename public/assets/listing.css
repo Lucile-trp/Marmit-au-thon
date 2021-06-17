@@ -31,6 +31,7 @@
     height: 177px;
     width: 356px;
     border-radius: 10px 0px;
+    object-fit: cover;
 }
 h2{
     font-size: 1.5em;
