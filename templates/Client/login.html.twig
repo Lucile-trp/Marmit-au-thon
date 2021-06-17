@@ -1,11 +1,60 @@
 {% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/assets/connexion.css">
+{% endblock %}
+
 {% block body %}
-    <h1>Hello je suis la page d'inscription</h1>
-    <form action="/Client/loginClient" method="post">
-        <label for="climail">Adresse mail</label>
-        <input type="email" name="climail" required>
-        <label for="clipassword">Mot de passe</label>
-        <input type="password" name="clipassword" required>
-        <button type="submit">Se connecter</button>
-    </form>
+    <div class="overlayLogin">
+        <div class="container" id ="container">
+            <div class="form-container sign-up-container">
+                <form class="register" action="Client/insert" method="post">
+                    <h1>Créez votre compte</h1>
+                    <label for="cliusername">Nom d'utilisateur</label>
+                    <input class="login" type="text" name="cliusername" required>
+                    <label for="climail">Adresse mail</label>
+                    <input class="login" type="email" name="climail" required>
+                    <label for="clipassword">Mot de passe</label>
+                    <input class="login" type="password" name="clipassword" required>
+                    <button type="submit">Je valide mon inscription</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form class="login" action="Client/loginClient" method="post">
+                    <h1>Connectez vous</h1>
+                    <label for="climail">Adresse mail</label>
+                    <input class="login" type="email" name="climail" required>
+                    <label for="clipassword">Mot de passe</label>
+                    <input class="login" type="password" name="clipassword" required>
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Bonjour !</h1>
+                        <p>Veuillez entrer vos informations personnelles pour vous connecter</p>
+                        <button class="ghost" id="signIn" style="color: #fff">Me connecter</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Bienvenue !</h1>
+                        <p>Entrez vos informations personnelles pour pouvoir vous inscrire</p>
+                        <button class="ghost" id="signUp" style="color: #fff">Créer mon compte</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            const signUpButton = document.getElementById('signUp');
+            const signInButton = document.getElementById('signIn');
+            const container = document.getElementById('container');
+
+            signUpButton.addEventListener('click', () => {
+                container.classList.add("right-panel-active");
+            });
+            signInButton.addEventListener('click', () => {
+                container.classList.remove("right-panel-active");
+            });
+        </script>
+    </div>
 {% endblock %}

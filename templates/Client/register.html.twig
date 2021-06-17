@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>Hello je suis la page d'inscription</h1>
-    <form action="/Client/insert" method="post">
-        <label for="cliusername">Nom d'utilisateur</label>
-        <input type="text" name="cliusername" required>
-        <label for="climail">Adresse mail</label>
-        <input type="email" name="climail" required>
-        <label for="clipassword">Mot de passe</label>
-        <input type="password" name="clipassword" required>
-        <button type="submit">Je valide mon inscription</button>
-    </form>
+    <div class="content">
+        <h1>S'inscrire</h1>
+        <form action="/Client/insert" method="post">
+            <label for="cliusername">Nom d'utilisateur</label>
+            <input type="text" name="cliusername" required>
+            <label for="climail">Adresse mail</label>
+            <input type="email" name="climail" required>
+            <label for="clipassword">Mot de passe</label>
+            <input type="password" name="clipassword" required>
+            <button type="submit">Je valide mon inscription</button>
+        </form>
+    </div>
 {% endblock %}
