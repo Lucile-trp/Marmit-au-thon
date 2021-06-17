@@ -23,6 +23,16 @@ class Blog {
         return $result;
 
     }
+    public function getThree(){
+        $bdd = BDD::getInstance();
+        $request = "SELECT * FROM article ORDER BY art_id DESC LIMIT 3;";
+
+        $req = $bdd->prepare($request);
+        $req->execute();
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
 
     public static function getOne($slug){
         $bdd = BDD::getInstance();
@@ -33,7 +43,6 @@ class Blog {
         $req->execute();
         $result = $req->fetch();
         return $result;
-
     }
 
 
