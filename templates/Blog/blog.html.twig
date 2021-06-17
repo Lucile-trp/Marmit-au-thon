@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-column">
                     <p class="article-content">{{ article.art_resume }}</p><br>
-                    <p class="article-date">Article posté le : {{ article.art_date }}</p><br>
+                    <p class="article-date">Article posté le : {{ article.art_date|date("d/m/Y H:m:s") }}</p><br>
                     <a class="article-lien-detail" href="/Blog/detail/{{ article.art_slug }}">Voir plus...</a>
                 </div>
                 <hr>
