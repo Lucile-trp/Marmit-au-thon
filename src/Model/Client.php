@@ -109,10 +109,10 @@ class Client
      * Récupère un client par rapport à son email
      */
     public function getClientByEmail($climail){
-        $query = BDD::getInstance()->prepare("SELECT * FROM client WHERE climail = :climail");
+        $query = BDD::getInstance()->prepare("SELECT idclient,cliusername,climail,cliadmin FROM client WHERE climail = :climail");
 
         try {
-            $query->bindParam(':climail', $climail, PDO::PARAM_INT);
+            $query->bindParam(':climail', $climail, PDO::PARAM_STR);
             $query->execute();
             return $query->fetch(PDO::FETCH_ASSOC);
         }catch (PDOException $exception){
@@ -146,8 +146,8 @@ class Client
     }
 
     /**
-     * @param $clipassword
-     * retourne le mot de passe d'un utilisateur par rapport à son email
+     * @param $climail
+     * @return false
      */
     public function getClientPassword($climail){
         $query = BDD::getInstance()->prepare("SELECT clipassword FROM client WHERE climail = :climail");

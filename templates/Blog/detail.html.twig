@@ -14,12 +14,14 @@
         <p>{{ article.art_content|raw }}</p>
 
         <hr>
-        <form class="form-btn-supprimer" method="post" action="/Blog/deleteArticle/{{ article.art_id }}">
-            <button class="btn-supprimer">Supprimer l'article</button>
-        </form>
-        <form class="form-btn-modifier" method="post" action="/Blog/getDetailsForUpdate/{{ article.art_slug }}">
-            <button class="btn-modifier">Modifier l'article</button>
-        </form>
+        {% if session.client.cliadmin == "1" %}
+            <form class="form-btn-supprimer" method="post" action="/Blog/deleteArticle/{{ article.art_id }}">
+                <button class="btn-supprimer">Supprimer l'article</button>
+            </form>
+            <form class="form-btn-modifier" method="post" action="/Blog/getDetailsForUpdate/{{ article.art_slug }}">
+                <button class="btn-modifier">Modifier l'article</button>
+            </form>
+        {% endif %}
 
         <a class="lien-accueil" href="/">Retourner à l'accueil du site.</a>
     </div>

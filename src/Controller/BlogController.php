@@ -5,13 +5,17 @@ use src\Model\Blog;
 class BlogController extends AbstractController
 {
     public function index(){
-        //Définit le nom de la session avant de la démarrer
-        session_name("admin");
         session_start();
+        if (isset($_SESSION)){
+            $session = $_SESSION;
+        }else{
+            $session = null;
+        }
+
         $article = Blog::getAll();
         return $this->twig->render("Blog/blog.html.twig", [
             "articles" => $article,
-            "session" => $_SESSION,
+            "session" => $session,
         ]);
     }
 
@@ -25,10 +29,18 @@ class BlogController extends AbstractController
 
     //affiche les détails d'un article
     public function detail($slug){
+        session_start();
+        if (isset($_SESSION)){
+            $session = $_SESSION;
+        }else{
+            $session = null;
+        }
+
         $article = Blog::getOne($slug);
         return $this->twig->render("Blog/detail.html.twig",[
-                "article" => $article
-            ]);
+            "article" => $article,
+            "session" => $session
+        ]);
 
     }
 

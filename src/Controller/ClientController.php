@@ -38,8 +38,13 @@ class ClientController extends AbstractController
      * Déconnecte l'utilisateur et supprime sa session
      */
     public function logout(){
-        session_unset();
-        header("Location: /");
+        session_start();
+        if (isset($_SESSION)){
+            session_destroy();
+            header("Location: /");
+        }else{
+            header("Location: /");
+        }
     }
 
     /**
@@ -70,13 +75,13 @@ class ClientController extends AbstractController
         }
     }
 
-    public function loginClient(){
+    public function connectClient(){
         if (empty($_POST)){
             header("Location: /Client/login");
         }
         else{
             $climail = htmlentities($_POST["climail"]);
-            $clipassword_clear = $_POST["clipassword"];
+            $clipassword_clear = htmlentities($_POST["clipassword"]);
             $client = new Client();
             //Décodage du mot de passe
             $clipassword_encrypted = $client->getClientPassword($climail);
@@ -86,12 +91,12 @@ class ClientController extends AbstractController
                 session_start();
                 $getClient = $client->getClientByEmail($climail);
                 $_SESSION["client"] = [
-                    "id" => $getClient["idclient"],
-                    "name" => $getClient["cliusername"],
-                    "email" => $getClient["climail"],
-                    "role" => $getClient["cliadmin"]
+                    "idclient" => $getClient["idclient"],
+                    "cliusername" => $getClient["cliusername"],
+                    "climail" => $getClient["climail"],
+                    "cliadmin" => $getClient["cliadmin"]
                 ];
-                header("Location: /");
+                return header("Location: /");
             }else{
                 echo "Mauvais mot de passe";
             }
