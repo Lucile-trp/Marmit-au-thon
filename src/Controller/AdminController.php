@@ -39,7 +39,6 @@ class AdminController extends AbstractController
         $checkPassword = password_verify($password_clear,$password_encrypted);
 
         $isAdmin = $admin->isAdmin($mail);
-
         if ($isAdmin === true && $checkPassword === true){
             header("Location: /Admin/index");
         }else{
@@ -55,20 +54,14 @@ class AdminController extends AbstractController
      * Affiche la page d'admin qui contient l'ensemble des éléments du site
      */
     public function index(){
-        session_start();
-        if (empty($_SESSION["admin"])){
-            header("Location: /Admin/login");
-        }
-        else{
-            $admin = new Admin();
-            $blog = new Blog();
-            $recipe = new Recette();
-            return $this->twig->render("/Admin/index.html.twig", [
-                "customers" => $admin->getAllActivesClients(),
-                "articles" => $blog->getAll(),
-                "recipes" => $recipe->getAllRecipes()
-            ]);
-        }
+        $admin = new Admin();
+        $blog = new Blog();
+        $recipe = new Recette();
+        return $this->twig->render("/Admin/index.html.twig", [
+            "customers" => $admin->getAllActivesClients(),
+            "articles" => $blog->getAll(),
+            "recipes" => $recipe->getAllRecipes()
+        ]);
     }
 
     /**
