@@ -5,6 +5,7 @@
       "ext-pdo": "*",
         "cocur/slugify": "^4.0",
         "dompdf/dompdf": "^1.0",
-        "cocur/slugify": "^4.0"
+        "cocur/slugify": "^4.0",
+        "swiftmailer/swiftmailer": "^6.2"
     }
 }
