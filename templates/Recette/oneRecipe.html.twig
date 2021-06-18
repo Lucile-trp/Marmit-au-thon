@@ -16,10 +16,6 @@
         {% endif %}
         <h1 class="recipe-name">{{ recipename }}</h1>
         <div class="icons">
-            <div class="fav">
-                <a href="#" class="heart-trigger"><i class="far fa-heart"></i></a>
-                <p>Favoris</p>
-            </div>
             <div class="share">
                 <a href="#" class="modal-trigger"><i class="fas fa-share"></i></a>
                 <p>Partager</p>
@@ -81,13 +77,6 @@
     })
         closeModal.addEventListener('click', () => {
         modal.style.display = "none";
-    })
-
-        const heartTrigger = document.querySelector('.heart-trigger')
-        heartTrigger.addEventListener('click', () =>{
-        let heartIcon = document.querySelector('.fa-heart')
-        heartIcon.classList.remove('far')
-        heartIcon.classList.add('fas')
     })
     </script>
 {% endblock javascript %}
