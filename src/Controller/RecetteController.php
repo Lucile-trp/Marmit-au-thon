@@ -113,34 +113,37 @@ class RecetteController extends AbstractController {
      * Envoi une page recette par mail
      */
     public function send(){
+        if (!isset($_POST)){
+            header("Location: /Recette/oneRecipe/listing");
+        }else{
+            $destinataire = htmlentities($_POST["dest-mail"]);
+            $recipeslug = htmlentities($_POST["recipeslug"]);
+            $url = "http://marmitothon.alwaysdata.net/Recette/oneRecipe/".$recipeslug."";
 
-        $destinataire = htmlentities($_POST["dest-mail"]);
-        $recipeslug = htmlentities($_POST["recipeslug"]);
-        $url = "http://marmitothon.alwaysdata.net/Recette/oneRecipe/".$recipeslug."";
+            $transport = (new \Swift_SmtpTransport('smtp-marmitothon.alwaysdata.net', 25))
 
-        $transport = (new \Swift_SmtpTransport('smtp-marmitothon.alwaysdata.net', 25))
+                ->setUsername("marmitothon@alwaysdata.net")
+                ->setPassword("6gv21505");
+            $mailer = new \Swift_Mailer($transport);
 
-            ->setUsername("marmitothon@alwaysdata.net")
-            ->setPassword("6gv21505");
-        $mailer = new \Swift_Mailer($transport);
-
-        $message = (new \Swift_Message("Découvrez une nouvelle recette délicieuse !"))
-            ->setFrom(["marmitothon@alwaysdata.net" => "Marmitothon"])
-            ->setTo($destinataire)
-            ->setBody(
-                '<html>' .
-                ' <body>' .
-                '  Lien de la recette : <a href="' . $url .'">'.$url.'</a>' .
-                '<br>' .
-                '<br>' .
-                'Régale toi ! A Bientôt !' .
-                ' </body>' .
-                '</html>',
-                'text/html'); // Mark the content-type as HTML)
+            $message = (new \Swift_Message("Découvrez une nouvelle recette délicieuse !"))
+                ->setFrom(["marmitothon@alwaysdata.net" => "Marmitothon"])
+                ->setTo($destinataire)
+                ->setBody(
+                    '<html>' .
+                    ' <body>' .
+                    '  Lien de la recette : <a href="' . $url .'">'.$url.'</a>' .
+                    '<br>' .
+                    '<br>' .
+                    'Régale toi ! A Bientôt !' .
+                    ' </body>' .
+                    '</html>',
+                    'text/html');
 
 
-        $result = $mailer->send($message);
-        return $result;
+            $mailer->send($message);
+            header("Location: /Recette/oneRecipe/" . $recipeslug);
+        }
     }
 
     /**
