@@ -109,21 +109,40 @@ class RecetteController extends AbstractController {
         ]);
     }
 
-    public function send_mail(){
-        ini_set('SMTP','localhost');
-        ini_set('smtp_port','25');
-        try {
-            $mailTest = mail(
-                'toto@gmail.com',
-                'Test mail',
-                'ceci est un message',
-                'From: test@marmitothon.fr'
-            );
-            echo "C'est bon";
-        }catch (\Exception $e){
-            echo $e->getMessage();
-        }
+    /**
+     * Envoi une page recette par mail
+     */
+    public function send(){
+
+        $destinataire = htmlentities($_POST["dest-mail"]);
+        $recipeslug = htmlentities($_POST["recipeslug"]);
+        $url = "http://marmitothon.alwaysdata.net/Recette/oneRecipe/".$recipeslug."";
+
+        $transport = (new \Swift_SmtpTransport('smtp-marmitothon.alwaysdata.net', 25))
+
+            ->setUsername("marmitothon@alwaysdata.net")
+            ->setPassword("6gv21505");
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = (new \Swift_Message("Découvrez une nouvelle recette délicieuse !"))
+            ->setFrom(["marmitothon@alwaysdata.net" => "Marmitothon"])
+            ->setTo($destinataire)
+            ->setBody(
+                '<html>' .
+                ' <body>' .
+                '  Lien de la recette : <a href="' . $url .'">'.$url.'</a>' .
+                '<br>' .
+                '<br>' .
+                'Régale toi ! A Bientôt !' .
+                ' </body>' .
+                '</html>',
+                'text/html'); // Mark the content-type as HTML)
+
+
+        $result = $mailer->send($message);
+        return $result;
     }
+
     /**
      * Affiche une page avec un ensemble de recette
      */
