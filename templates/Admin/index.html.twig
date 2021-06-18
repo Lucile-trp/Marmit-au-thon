@@ -40,7 +40,7 @@
                 <td>{{ article.art_id }}</td>
                 <td>{{ article.art_title }}</td>
                 <td>{{ article.art_date|date("d/m/Y") }} à {{ article.art_date|date("H:m:s") }}</td>
-                <td><a href="/Admin/deleteArticle/{{ article.art_id }}" class="btn-delete">Supprimer l'article (ne pas cliquer)</a></td>
+                <td><a href="/Admin/deleteArticle/{{ article.art_id }}" class="btn-delete">Supprimer l'article</a></td>
                 <td><a href="/Blog/detail/{{ article.art_slug }}" class="btn-delete" target="_blank">Voir l'article</a></td>
             </tr>
         {% endfor %}
